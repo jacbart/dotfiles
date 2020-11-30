@@ -165,6 +165,26 @@ function kc-shell() {
   fi
 }
 
+function ge() {
+  if [[ $# != 1 ]]; then
+    echo "usage: ge <email>"
+  else
+    case "$1" in
+      "jry")
+        EMAIL="jack.bartlett@journey.ai"
+        git config user.email "$EMAIL"
+      ;;
+      "jack")
+        EMAIL="jacbart@gmail.com"
+        git config user.email "$EMAIL"
+      ;;
+      *)
+        echo "not an option"
+      ;;
+    esac
+  fi
+}
+
 ############
 ## ALIAS' ##
 ############
