@@ -1,0 +1,9 @@
+[user]
+  name = Jack Bartlett
+  email = jack.bartlett@journey.ai
+[push]
+  default = current
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+[pull]
+	rebase = false
