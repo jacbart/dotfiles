@@ -13,6 +13,8 @@ antigen use oh-my-zsh
 
 antigen bundle git
 antigen bundle terraform
+antigen bundle docker
+antigen bundle docker-compose
 antigen bundle systemd
 antigen bundle helm
 antigen bundle kubectl
@@ -46,7 +48,7 @@ export GOVC_URL="https://vcsa.denver.journey"
 export GOVC_INSECURE="true"
 
 # Androidsdk from Snap install 
-export ANDROID_SDK_ROOT=/home/meep/snap/androidsdk/current/AndroidSDK
+export ANDROID_SDK_ROOT=$HOME/snap/androidsdk/current/AndroidSDK
 
 # GO ENV
 export GOPATH="$HOME/.go"
@@ -78,15 +80,12 @@ kitty + complete setup zsh | source /dev/stdin
 
 # minio client - auto complete
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /home/meep/.go/bin/mc mc
+complete -o nospace -C $HOME/.go/bin/mc mc
 
 # zsh-autosuggestion color highlighting and key bindings
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff5f00"
 bindkey '^E' autosuggest-accept
 bindkey '^ ' forward-word
-
-# fuzzy finder
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
