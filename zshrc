@@ -41,7 +41,7 @@ fi
 
 # GOVC environment variables
 export GOVC_USERNAME="jbartlett@denver.journey"
-export GOVC_PASSWORD="gw7TMZQ-ybqpHX2"
+export GOVC_PASSWORD=""
 export GOVC_URL="https://vcsa.denver.journey"
 export GOVC_INSECURE="true"
 
