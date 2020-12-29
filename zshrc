@@ -76,7 +76,9 @@ bindkey -e
 zstyle :compinstall filename "$HOME/.zshrc"
 autoload -Uz compinit
 compinit
-kitty + complete setup zsh | source /dev/stdin
+if command -v kitty &> /dev/null; then
+    kitty + complete setup zsh | source /dev/stdin
+fi
 
 # minio client - auto complete
 autoload -U +X bashcompinit && bashcompinit
