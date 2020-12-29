@@ -170,7 +170,7 @@ function ge() {
   else
     case "$1" in
       "jry")
-        EMAIL="jack.bartlett@journey.ai"
+        EMAIL="jack.bartlett@journeyid.com"
         git config user.email "$EMAIL"
       ;;
       "jack")
