@@ -41,6 +41,9 @@ fi
 ## Variables ##
 ###############
 
+# Ansible Path
+export ANSIBLE_PATH="$HOME/workspace/ansible"
+
 # GOVC environment variables
 export GOVC_USERNAME="jbartlett@denver.journey"
 export GOVC_PASSWORD=""
@@ -202,3 +205,5 @@ alias t="tmux"
 alias j="z"
 alias gs="git status"
 alias copy="xclip -sel clip"
+alias ans="ansible"
+alias ansp="ansible-playbook"
