@@ -42,7 +42,7 @@ fi
 ###############
 
 # Ansible Path
-export ANSIBLE_PATH="$HOME/workspace/ansible"
+export ANSIBLE_PATH="$HOME/workspace/lodestone"
 
 # GOVC environment variables
 export GOVC_USERNAME="jbartlett@denver.journey"
