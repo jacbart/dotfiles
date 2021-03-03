@@ -2,7 +2,7 @@
   name = Jack Bartlett
 [push]
   default = current
-[url "git@github.com:"]
-  insteadOf = https://github.com/
+[url "git@github.com:journeyai"]
+  insteadOf = https://github.com/journeyai
 [pull]
 	rebase = false

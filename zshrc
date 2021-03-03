@@ -128,7 +128,7 @@ function triage() {
 # kubernetes context management function
 function kcxt() {
   if [[ -z $1 ]]; then
-      kubectl config get-contexts
+      kubectl config get-contexts | awk '/^[^*|CURRENT]/{print $1} /^\*/{print "\033[1;32m" $2 "\033[0m "}'
   elif [[ $# -ge 1 ]]; then
     case "$1" in
       "ns" | "namespace" | "-ns" | "-namespace")
