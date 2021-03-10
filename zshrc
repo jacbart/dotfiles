@@ -42,6 +42,10 @@ if [[ -d ~/.nvm ]]; then
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 fi
 
+if [[ ! -f $HOME/.local/share/nvim/site/autoload/plug.vim ]]; then
+  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+fi
+
 ###############
 ## Variables ##
 ###############
@@ -213,3 +217,5 @@ alias copy="xclip -sel clip"
 alias as="ansible"
 alias ap="ansible-playbook"
 alias av="ansible-vault"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
