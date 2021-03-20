@@ -8,6 +8,7 @@ set clipboard+=unnamedplus,unnamed
 " allow unsaved buffers
 set hidden
 
+
 "==============================
 "=========== Plugins ==========
 "==============================
@@ -34,7 +35,7 @@ Plug 'majutsushi/tagbar'
 """ coc.vim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Better display for messages
-set cmdheight=2
+" set cmdheight=2
 " set updatetime=300
 let g:coc_enable_locationlist = 0
 let g:coc_global_extensions = [
@@ -69,10 +70,11 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 command! G Ge :
 "~~~~ looks ~~~~
-""" dark
-" Plug 'morhetz/gruvbox'
-""" light
-" Plug 'vim-scripts/PaperColor.vim'
+Plug 'ayu-theme/ayu-vim' " or other package manager
+"...
+set termguicolors
+let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
 """ airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
