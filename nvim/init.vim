@@ -12,7 +12,7 @@ set hidden
 "==============================
 "=========== Plugins ==========
 "==============================
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 """ fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -71,7 +71,6 @@ Plug 'tpope/vim-fugitive'
 command! G Ge :
 "~~~~ looks ~~~~
 Plug 'ayu-theme/ayu-vim' " or other package manager
-"...
 set termguicolors
 let ayucolor="dark"   " for dark version of theme
 colorscheme ayu
