@@ -30,10 +30,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-if [[ -d ~/.nvm ]]; then
-  export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-fi
+# if [[ -d ~/.nvm ]]; then
+#   export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+#   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# fi
 
 if [[ ! -f $HOME/.local/share/nvim/site/autoload/plug.vim ]]; then
   sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -43,7 +43,7 @@ fi
 ## Variables ##
 ###############
 
-[[ ! -f $DOTFILES/shell/env.sh ]] || source $DOTFILES/shell/env.sh
+[[ ! -f $DOTFILES/shell/env.zsh ]] || source $DOTFILES/shell/env.zsh
 
 ###############
 
@@ -64,7 +64,7 @@ fi
 [[ -f ~/.config/ani/config.yaml ]] && touch "${fpath[1]}/_ani" && ani gen completion zsh > "${fpath[1]}/_ani"
 autoload -U compinit; compinit
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C $HOME/.go/bin/mc mc
+# complete -o nospace -C $HOME/.go/bin/mc mc
 
 # zsh-autosuggestion color highlighting and key bindings
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff5f00"
@@ -78,7 +78,7 @@ bindkey '^ ' forward-word
 ## Functions ##
 ###############
 
-[[ ! -f $DOTFILES/shell/kubectl.sh ]] || source $DOTFILES/shell/kubectl.sh
+[[ ! -f $DOTFILES/shell/kubectl.zsh ]] || source $DOTFILES/shell/kubectl.zsh
 
 function ge() {
   if [[ $# != 1 ]]; then
@@ -111,7 +111,7 @@ function kp {
 ## ALIAS' ##
 ############
 
-[[ ! -f $DOTFILES/shell/alias.sh ]] || source $DOTFILES/shell/alias.sh
+[[ ! -f $DOTFILES/shell/alias.zsh ]] || source $DOTFILES/shell/alias.zsh
 
 ############
 
