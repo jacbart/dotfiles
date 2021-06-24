@@ -1,6 +1,6 @@
 #!/bin/bash
 if [[ -d $HOME/.dotfiles ]]; then
-    echo "folder already exsists"
+    echo "folder already exists, skipping install"
 else
     git clone https://github.com/jacbart/dotfiles.git $HOME/.dotfiles
 
