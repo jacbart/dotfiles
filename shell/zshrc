@@ -60,7 +60,9 @@ if command -v kitty &> /dev/null; then
     kitty + complete setup zsh | source /dev/stdin
 fi
 
-# minio client - auto complete
+# auto complete
+[[ -f ~/.config/ani/config.yaml ]] && ani gen completion zsh > "${fpath[1]}/_ani"
+autoload -U compinit; compinit
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C $HOME/.go/bin/mc mc
 

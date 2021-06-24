@@ -16,8 +16,9 @@ export GOROOT="/usr/local/go"
 export GOPRIVATE=github.com/journeyai
 
 # Export PATH
+ISTIO_PATH="$HOME/workspace/istio-1.9.4/bin"
 HOME_PATHS="$HOME/.local/bin:/$HOME/bin"
-export PATH="$PATH:$HOME_PATHS:/snap/bin:$GOROOT/bin:$GOPATH/bin"
+export PATH="$PATH:$ITSIO_PATH:$HOME_PATHS:/snap/bin:$GOROOT/bin:$GOPATH/bin"
 
 # docker buildkit
 export DOCKER_BUILDKIT=1

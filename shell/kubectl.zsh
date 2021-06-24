@@ -2,7 +2,7 @@
 function triage() {
   namespace=${1:-default}
 
-  config=https://raw.githubusercontent.com/taybart/dotfiles/master/triage.yaml
+  config=https://raw.githubusercontent.com/taybart/dotfiles/main/triage.yaml
   kubectl apply -n $namespace -f $config
   msg="waiting for pod"
   waittime=0
