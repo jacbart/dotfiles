@@ -21,6 +21,7 @@ ohmyzsh/ohmyzsh path:plugins/kubectl
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-completions
+romkatv/powerlevel10
 BUNDLE
 
 ###############
