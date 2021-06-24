@@ -2,10 +2,10 @@
 export ANSIBLE_PATH="$HOME/workspace/lodestone"
 
 # GOVC environment variables
-export GOVC_USERNAME="jbartlett@denver.journey"
-export GOVC_PASSWORD=""
-export GOVC_URL="https://vcsa.denver.journey"
-export GOVC_INSECURE="true"
+# export GOVC_USERNAME="jbartlett@denver.journey"
+# export GOVC_PASSWORD=""
+# export GOVC_URL="https://vcsa.denver.journey"
+# export GOVC_INSECURE="true"
 
 # Androidsdk from Snap install 
 #export ANDROID_SDK_ROOT=$HOME/snap/androidsdk/current/AndroidSDK
@@ -16,8 +16,8 @@ export GOROOT="/usr/local/go"
 export GOPRIVATE=github.com/journeyai
 
 # Export PATH
-ISTIO_PATH="$HOME/workspace/istio-1.9.4/bin"
-HOME_PATHS="$HOME/.local/bin:/$HOME/bin"
+export ISTIO_PATH="$HOME/workspace/istio-1.9.4/bin"
+export HOME_PATHS="$HOME/.local/bin:/$HOME/bin"
 export PATH="$PATH:$ITSIO_PATH:$HOME_PATHS:/snap/bin:$GOROOT/bin:$GOPATH/bin"
 
 # docker buildkit
