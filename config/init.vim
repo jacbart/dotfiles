@@ -70,10 +70,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 command! G Ge :
 "~~~~ looks ~~~~
-Plug 'ayu-theme/ayu-vim' " or other package manager
-set termguicolors
-let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
+Plug 'morhetz/gruvbox'
 """ airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -85,6 +82,8 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'unblevable/quick-scope'
 Plug 'dyng/ctrlsf.vim'
 call plug#end()
+
+colorscheme gruvbox
 
 "==============================
 "======== Keybindings =========

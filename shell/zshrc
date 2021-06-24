@@ -1,0 +1,116 @@
+export TERM=xterm-256color
+export DOTFILES="$HOME/.dotfiles"
+
+##############
+## ANTIBODY ##
+##############
+
+if ! type "antibody" > /dev/null; then
+  $DOTFILES/shell/get_antibody.sh -b $HOME/.local/bin
+fi
+
+source <(antibody init)
+antibody bundle <<BUNDLE
+ohmyzsh/ohmyzsh
+ohmyzsh/ohmyzsh path:plugins/z
+ohmyzsh/ohmyzsh path:plugins/fzf
+ohmyzsh/ohmyzsh path:plugins/sudo
+ohmyzsh/ohmyzsh path:plugins/docker
+ohmyzsh/ohmyzsh path:plugins/docker-compose
+ohmyzsh/ohmyzsh path:plugins/kubectl
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-completions
+BUNDLE
+
+###############
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+if [[ -d ~/.nvm ]]; then
+  export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+fi
+
+if [[ ! -f $HOME/.local/share/nvim/site/autoload/plug.vim ]]; then
+  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+fi
+
+###############
+## Variables ##
+###############
+
+[[ ! -f $DOTFILES/shell/env.sh ]] || source $DOTFILES/shell/env.sh
+
+###############
+
+# from zsh configuration script
+HISTFILE=~/.histfile
+HISTSIZE=100000
+SAVEHIST=100000
+setopt autocd extendedglob notify
+bindkey -e
+zstyle :compinstall filename "$HOME/.zshrc"
+autoload -Uz compinit
+compinit
+if command -v kitty &> /dev/null; then
+    kitty + complete setup zsh | source /dev/stdin
+fi
+
+# minio client - auto complete
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C $HOME/.go/bin/mc mc
+
+# zsh-autosuggestion color highlighting and key bindings
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff5f00"
+bindkey '^E' autosuggest-accept
+bindkey '^ ' forward-word
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+###############
+## Functions ##
+###############
+
+[[ ! -f $DOTFILES/shell/kubectl.sh ]] || source $DOTFILES/shell/kubectl.sh
+
+function ge() {
+  if [[ $# != 1 ]]; then
+    echo "usage: ge <email>"
+  else
+    case "$1" in
+      "jry")
+        EMAIL="jack.bartlett@journeyid.com"
+        git config user.email "$EMAIL"
+      ;;
+      "jack")
+        EMAIL="jacbart@gmail.com"
+        git config user.email "$EMAIL"
+      ;;
+      *)
+        echo "not an option"
+      ;;
+    esac
+  fi
+}
+
+function kp {
+  local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
+  if [ "x$pid" != "x" ]; then
+    echo $pid | xargs kill -${1:-9}
+  fi
+}
+
+############
+## ALIAS' ##
+############
+
+[[ ! -f $DOTFILES/shell/alias.sh ]] || source $DOTFILES/shell/alias.sh
+
+############
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

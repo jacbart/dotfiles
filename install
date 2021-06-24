@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if hash zsh 2>/dev/null; then
+    rm -rf  $HOME/.zshrc
+    ln -s $HOME/.dotfiles/shell/zshrc $HOME/.zshrc
+    touch $HOME/.zshrc.local
+
+    [[ -d $HOME/workspace ]] || mkdir $HOME/workspace
+    [[ -d $HOME/bin ]] || mkdir $HOME/bin
+    
+    if hash nvim 2>/dev/null; then
+        rm -rf  $HOME/.config/nvim
+        mkdir -p $HOME/.config/nvim
+        ln -s $HOME/.dotfiles/config/init.vim $HOME/.config/nvim/init.vim
+    fi
+
+    if hash kitty 2>/dev/null; then
+        mkdir -p $HOME/.config/kitty
+        ln -s $HOME/.dotfiles/config/kitty.conf $HOME/.config/kitty/kitty.conf
+    fi
+else
+    echo "missing zsh"
+fi

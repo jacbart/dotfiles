@@ -1,7 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
-let g:netrw_dirhist_5='/home/meep/workspace/ui-mobile/website/pages/en'
-let g:netrw_dirhist_4='/home/meep/workspace/ui-mobile/website/pages'
-let g:netrw_dirhist_3='/home/meep/workspace/ui-mobile/website'
-let g:netrw_dirhist_2='/home/meep/.config/certool/internal'
-let g:netrw_dirhist_1='/home/meep/bin'
