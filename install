@@ -22,6 +22,8 @@ else
             mkdir -p $HOME/.config/kitty
             ln -s $HOME/.dotfiles/config/kitty.conf $HOME/.config/kitty/kitty.conf
         fi
+
+        source $HOME/.zshrc
     else
         echo "missing zsh"
     fi
