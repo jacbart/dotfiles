@@ -62,7 +62,7 @@ if command -v kitty &> /dev/null; then
 fi
 
 # auto complete
-[[ -f ~/.config/ani/config.yaml ]] && touch "${fpath[1]}/_ani" && ani gen completion zsh > "${fpath[1]}/_ani"
+[[ -f ~/.config/ani/config.yaml ]] && mkdir -p ${fpath[1]} && touch "${fpath[1]}/_ani" && ani gen completion zsh > "${fpath[1]}/_ani"
 autoload -U compinit; compinit
 autoload -U +X bashcompinit && bashcompinit
 # complete -o nospace -C $HOME/.go/bin/mc mc
