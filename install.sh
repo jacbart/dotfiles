@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 function install() {
     git clone https://github.com/jacbart/dotfiles.git $HOME/.dotfiles

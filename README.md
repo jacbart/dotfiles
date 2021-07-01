@@ -1,7 +1,7 @@
 # dotfiles
 its dot file what else is there to say
 
-install
+install zsh first the run the below command
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/jacbart/dotfiles/main/install.sh)
+zsh <(curl -s https://raw.githubusercontent.com/jacbart/dotfiles/main/install.sh)
 ```
