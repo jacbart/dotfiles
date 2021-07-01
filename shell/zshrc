@@ -11,7 +11,7 @@ export DOTFILES="$HOME/.dotfiles"
 ## ANTIBODY ##
 ##############
 
-if ! type "antibody" > /dev/null; then
+if ! type "antibody" &> /dev/null; then
   $DOTFILES/shell/get_antibody.sh -b $HOME/.local/bin
 fi
 
@@ -37,11 +37,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# if [[ -d ~/.nvm ]]; then
-#   export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-#   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-# fi
-
 if [[ ! -f $HOME/.local/share/nvim/site/autoload/plug.vim ]]; then
   sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 fi
@@ -57,7 +52,8 @@ bindkey -e
 zstyle :compinstall filename "$HOME/.zshrc"
 autoload -Uz compinit
 compinit
-if command -v kitty &> /dev/null; then
+
+if type kitty &> /dev/null; then
     kitty + complete setup zsh | source /dev/stdin
 fi
 
@@ -65,7 +61,6 @@ fi
 [[ -f ~/.config/ani/config.yaml ]] && mkdir -p ${fpath[1]} && touch "${fpath[1]}/_ani" && ani gen completion zsh > "${fpath[1]}/_ani"
 autoload -U compinit; compinit
 autoload -U +X bashcompinit && bashcompinit
-# complete -o nospace -C $HOME/.go/bin/mc mc
 
 # zsh-autosuggestion color highlighting and key bindings
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff5f00"
@@ -79,27 +74,9 @@ bindkey '^ ' forward-word
 ## Functions ##
 ###############
 
-[[ ! -f $DOTFILES/shell/kubectl.zsh ]] || source $DOTFILES/shell/kubectl.zsh
-
-function ge() {
-  if [[ $# != 1 ]]; then
-    echo "usage: ge <email>"
-  else
-    case "$1" in
-      "jry")
-        EMAIL="jack.bartlett@journeyid.com"
-        git config user.email "$EMAIL"
-      ;;
-      "jack")
-        EMAIL="jacbart@gmail.com"
-        git config user.email "$EMAIL"
-      ;;
-      *)
-        echo "not an option"
-      ;;
-    esac
-  fi
-}
+if type kubectl &> /dev/null; then
+  [[ ! -f $DOTFILES/shell/kubectl.zsh ]] || source $DOTFILES/shell/kubectl.zsh
+fi
 
 function kp {
   local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')

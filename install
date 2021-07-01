@@ -1,10 +1,9 @@
 #!/bin/bash
-if [[ -d $HOME/.dotfiles ]]; then
-    echo "folder already exists, skipping install"
-else
+
+function install() {
     git clone https://github.com/jacbart/dotfiles.git $HOME/.dotfiles
 
-    if hash zsh 2>/dev/null; then
+    if type zsh &> /dev/null; then
         rm -rf  $HOME/.zshrc
         ln -s $HOME/.dotfiles/shell/zshrc $HOME/.zshrc
         touch $HOME/.zshrc.local
@@ -12,13 +11,13 @@ else
         [[ -d $HOME/workspace ]] || mkdir $HOME/workspace
         [[ -d $HOME/bin ]] || mkdir $HOME/bin
         
-        if hash nvim 2>/dev/null; then
+        if type nvim &> /dev/null; then
             rm -rf  $HOME/.config/nvim
             mkdir -p $HOME/.config/nvim
             ln -s $HOME/.dotfiles/config/init.vim $HOME/.config/nvim/init.vim
         fi
 
-        if hash kitty 2>/dev/null; then
+        if type kitty &> /dev/null; then
             mkdir -p $HOME/.config/kitty
             ln -s $HOME/.dotfiles/config/kitty.conf $HOME/.config/kitty/kitty.conf
         fi
@@ -27,4 +26,21 @@ else
     else
         echo "missing zsh"
     fi
+}
+
+function yes_or_no {
+    while true; do
+        read -p "$* [y/n]: " yn
+        case $yn in
+            [Yy]*) return 0  ;;  
+            [Nn]*) echo "Aborted" ; return  1 ;;
+        esac
+    done
+}
+
+if [[ -d $HOME/.dotfiles ]]; then
+    message="~/.dotfiles already exists, would you like to remove and install again?"
+    yes_or_no "$message" && install
+else
+    install
 fi

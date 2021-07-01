@@ -1,5 +1,5 @@
 # Ansible Path
-export ANSIBLE_PATH="$HOME/workspace/lodestone"
+# export ANSIBLE_PATH="$HOME/workspace/lodestone"
 
 # GOVC environment variables
 # export GOVC_USERNAME="jbartlett@denver.journey"
@@ -8,7 +8,7 @@ export ANSIBLE_PATH="$HOME/workspace/lodestone"
 # export GOVC_INSECURE="true"
 
 # Androidsdk from Snap install 
-#export ANDROID_SDK_ROOT=$HOME/snap/androidsdk/current/AndroidSDK
+# export ANDROID_SDK_ROOT=$HOME/snap/androidsdk/current/AndroidSDK
 
 # GO ENV
 export GOPATH="$HOME/.go"
