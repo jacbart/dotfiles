@@ -12,12 +12,18 @@ function install() {
         [[ -d $HOME/bin ]] || mkdir $HOME/bin
         [[ -d $HOME/.ssh ]] || mkdir $HOME/.ssh
         [[ -f $HOME/.ssh/config ]] || ln -s $HOME/.dotfiles/config/ssh.config $HOME/.ssh/config
-
+        [[ -f $HOME/.gitconfig ]] || ln -s $HOME/.dotfiles/config/gitconfig $HOME/.gitconfig
 
         if type nvim &> /dev/null; then
             [[ -d $HOME/.config/nvim ]] && rm -rf  $HOME/.config/nvim
             mkdir -p $HOME/.config/nvim
             ln -s $HOME/.dotfiles/config/init.vim $HOME/.config/nvim/init.vim
+        fi
+
+        if type tmux &> /dev/null; then
+            [[ -f $HOME/.tmux.conf ]] && rm -f  $HOME/.tmux.conf
+            [[ ! -d $HOME/.tmux ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+            ln -s $HOME/.dotfiles/config/tmux.conf $HOME/.tmux.conf
         fi
 
         if type kitty &> /dev/null; then
