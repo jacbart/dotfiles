@@ -9,10 +9,12 @@ alias fw="sudo firewall-cmd"
 alias t="tmux"
 alias j="z"
 alias gs="git status"
-alias copy="xclip -sel clip" #linux
-#alias copy="clip.exe" #windows
-alias as="ansible"
-alias ap="ansible-playbook"
-alias av="ansible-vault"
+if [[ $(cat /proc/sys/kernel/osrelease | grep microsoft) ]]; then
+  alias copy="clip.exe" #windows
+else
+  alias copy="xclip -sel clip" #linux
+fi
 
 [[ ! -f $DOTFILES/shell/linux.zsh ]] || source $DOTFILES/shell/linux.zsh
+
+[[ ! -f $DOTFILES/shell/asdf.zsh ]] || source $DOTFILES/shell/asdf.zsh

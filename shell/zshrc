@@ -7,6 +7,12 @@ export DOTFILES="$HOME/.dotfiles"
 
 [[ ! -f $DOTFILES/shell/env.zsh ]] || source $DOTFILES/shell/env.zsh
 
+############
+## ALIAS' ##
+############
+
+[[ ! -f $DOTFILES/shell/alias.zsh ]] || source $DOTFILES/shell/alias.zsh
+
 ##############
 ## ANTIBODY ##
 ##############
@@ -50,17 +56,21 @@ SAVEHIST=100000
 setopt autocd extendedglob notify
 bindkey -e
 zstyle :compinstall filename "$HOME/.zshrc"
+
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+
+# auto complete
+[[ -f ~/.config/ani/config.yaml ]] && mkdir -p ${fpath[1]} && touch "${fpath[1]}/_ani" && ani gen completion zsh > "${fpath[1]}/_ani"
+
+# initialise completions with ZSH's compinit
+autoload -U +X bashcompinit && bashcompinit
 autoload -Uz compinit
 compinit
 
 if type kitty &> /dev/null; then
     kitty + complete setup zsh | source /dev/stdin
 fi
-
-# auto complete
-[[ -f ~/.config/ani/config.yaml ]] && mkdir -p ${fpath[1]} && touch "${fpath[1]}/_ani" && ani gen completion zsh > "${fpath[1]}/_ani"
-autoload -U compinit; compinit
-autoload -U +X bashcompinit && bashcompinit
 
 # zsh-autosuggestion color highlighting and key bindings
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff5f00"
@@ -84,12 +94,6 @@ function kp {
     echo $pid | xargs kill -${1:-9}
   fi
 }
-
-############
-## ALIAS' ##
-############
-
-[[ ! -f $DOTFILES/shell/alias.zsh ]] || source $DOTFILES/shell/alias.zsh
 
 ############
 
