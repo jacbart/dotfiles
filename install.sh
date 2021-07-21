@@ -10,7 +10,10 @@ function install() {
 
         [[ -d $HOME/workspace ]] || mkdir $HOME/workspace
         [[ -d $HOME/bin ]] || mkdir $HOME/bin
-        
+        [[ -d $HOME/.ssh ]] || mkdir $HOME/.ssh
+        [[ -f $HOME/.ssh/config ]] || ln -s $HOME/.dotfiles/config/ssh.config $HOME/.ssh/config
+
+
         if type nvim &> /dev/null; then
             [[ -d $HOME/.config/nvim ]] && rm -rf  $HOME/.config/nvim
             mkdir -p $HOME/.config/nvim
