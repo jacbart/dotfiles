@@ -10,3 +10,10 @@
 #  insteadOf = https://github.com/jacbart
 [pull]
 	rebase = false
+[alias]
+	cc = cz commit
+	ck = cz check
+	cl = cz changelog
+	cv = cz version
+[core]
+	editor = nvim
