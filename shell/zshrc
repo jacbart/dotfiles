@@ -97,4 +97,5 @@ function kp {
 
 ############
 
+source $HOME/.zshrc
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
