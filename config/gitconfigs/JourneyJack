@@ -1,0 +1,16 @@
+[user]
+  name = JourneyJack
+  email = jack.bartlett@journeyid.com
+[push]
+  default = current
+[url "git@github.com:journeyai"]
+  insteadOf = https://github.com/journeyai
+[pull]
+  rebase = false
+[alias]
+  cc = cz commit
+  ck = cz check
+  cl = cz changelog
+  cv = cz version
+[core]
+  editor = nvim
