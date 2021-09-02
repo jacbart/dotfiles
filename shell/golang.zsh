@@ -7,7 +7,7 @@ function install_golang() {
       dl_url="https://golang.org/dl/go$VERSION.linux-amd64.tar.gz"
       curl -LO $dl_url
       sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go$VERSION.linux-amd64.tar.gz
-      rm go$VERSION.linux-amd64.tar.gz
+      rm go$VERSION.linux-amd64.tar.gz;;
     Darwin*)
       dl_url="https://golang.org/dl/go$VERSION.darwin-amd64.pkg"
       curl -LO $dl_url;;
