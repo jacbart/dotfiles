@@ -22,4 +22,4 @@ function install_golang() {
   esac
 }
 
-alias updatego="sudo install_golang"
+alias updatego="install_golang"
