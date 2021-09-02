@@ -7,7 +7,7 @@
 # export GOVC_URL="https://vcsa.denver.journey"
 # export GOVC_INSECURE="true"
 
-# Androidsdk from Snap install 
+# Androidsdk from Snap install
 # export ANDROID_SDK_ROOT=$HOME/snap/androidsdk/current/AndroidSDK
 
 # GO ENV

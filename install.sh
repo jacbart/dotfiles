@@ -15,7 +15,7 @@ function install() {
         if [[ ! -d $HOME/.config/gitconfigs ]]; then
             mkdir -p $HOME/.config/gitconfigs
             ln -s $HOME/.dotfiles/config/gitconfigs/* $HOME/.config/gitconfigs/
-            #go install github.com/theykk/git-switcher@latest
+            echo "run: go install github.com/theykk/git-switcher@latest"
         fi
         [[ -f $HOME/.gitconfig ]] || ln -s $HOME/.dotfiles/config/gitconfig $HOME/.gitconfig
         [[ -f $HOME/.asdfrc ]] || ln -s $HOME/.dotfiles/config/asdfrc $HOME/.asdfrc
@@ -49,7 +49,7 @@ function yes_or_no {
     while true; do
         read -q yn\?"$* [y/n]: "
         case $yn in
-            [Yy]*) return 0  ;;  
+            [Yy]*) return 0  ;;
             [Nn]*) echo "Aborted" ; return  1 ;;
         esac
     done
