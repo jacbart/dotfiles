@@ -12,7 +12,6 @@ export DOTFILES="$HOME/.dotfiles"
 ############
 
 [[ ! -f $DOTFILES/shell/alias.zsh ]] || source $DOTFILES/shell/alias.zsh
-[[ ! -f $DOTFILES/shell/golang.zsh ]] || source $DOTFILES/shell/golang.zsh
 
 ##############
 ## ANTIBODY ##

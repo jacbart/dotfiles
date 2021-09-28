@@ -1,4 +1,3 @@
-
 function install_golang() {
   VERSION=$1
   unameOut="$(uname -s)"
@@ -22,4 +21,4 @@ function install_golang() {
   esac
 }
 
-alias updatego="install_golang"
+install_golang $1
