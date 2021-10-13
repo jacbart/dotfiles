@@ -2,6 +2,15 @@ function open {
   xdg-open "$@" >/dev/null 2>&1
 }
 
+alias ls="ls -lh --color=auto" 
+alias la="ls -lah --color=auto"
+
+if [[ $(cat /proc/sys/kernel/osrelease | grep microsoft) ]]; then
+  alias copy="clip.exe" #windows
+else
+  alias copy="xclip -sel clip" #linux
+fi
+
 if [ -f /etc/debian_version ]; then
   alias update="sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && sudo apt-get autoremove"
   alias install="sudo apt-get install"
