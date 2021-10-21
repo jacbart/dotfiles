@@ -19,10 +19,9 @@ export GOPRIVATE=github.com/journeyai
 export CARGOPATH="$HOME/.cargo"
 
 # Export PATH
-export BREW_PATH="/opt/homebrew/bin"
 export ISTIO_PATH="$HOME/workspace/istio-1.9.4/bin"
-export HOME_PATHS="$HOME/.local/bin:/$HOME/bin"
-export PATH="$PATH:$ITSIO_PATH:$HOME_PATHS:/snap/bin:$GOROOT/bin:$GOPATH/bin:$CARGOPATH/bin:$BREW_PATH"
+export HOME_PATHS="$HOME/.local/bin:$HOME/bin"
+export PATH="$PATH:$ITSIO_PATH:$HOME_PATHS:/snap/bin:$GOROOT/bin:$GOPATH/bin:$CARGOPATH/bin"
 
 # docker buildkit
 export DOCKER_BUILDKIT=1

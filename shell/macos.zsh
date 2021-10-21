@@ -1,4 +1,6 @@
-# export PATH="$PATH:/opt/homebrew/bin"
+export PIP_PATH="$HOME/Library/Python/3.8/lib/python/site-packages:$HOME/Library/Python/3.8/bin"
+export BREW_PATH="/opt/homebrew/bin"
+export PATH="$PATH:$BREW_PATH:$PIP_PATH"
 alias copy="pbcopy"
 alias grep="grep -RIns --color=auto --exclude=\"tags\""
 alias ls="ls -G -l -h"

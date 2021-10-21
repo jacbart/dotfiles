@@ -61,7 +61,7 @@ zstyle :compinstall filename "$HOME/.zshrc"
 fpath=(${ASDF_DIR}/completions $fpath)
 
 # auto complete
-[[ -f ~/.config/ani/config.yaml ]] && mkdir -p ${fpath[1]} && touch "${fpath[1]}/_ani" && ani gen completion zsh > "${fpath[1]}/_ani"
+[[ -f ~/.config/ani/ani.conf ]] && mkdir -p ${fpath[1]} && touch "${fpath[1]}/_ani" && ani gen completion zsh > "${fpath[1]}/_ani"
 
 # initialise completions with ZSH's compinit
 autoload -U +X bashcompinit && bashcompinit
