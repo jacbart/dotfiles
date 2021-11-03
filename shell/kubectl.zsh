@@ -66,3 +66,14 @@ function kc-shell() {
     kubectl exec -ti $PODNAME -n $NAMESPACE -- sh
   fi
 }
+
+function localkube() {
+  if [[ "$1" == "up" ]]; then
+    if ! type "k3d" &> /dev/null; then
+      curl -s https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
+    fi
+    k3d cluster create localkube --registry-create localkube-registry:0.0.0.0:5000
+  elif [[ "$1" == "down" ]]; then
+    k3d cluster delete localkube
+  fi
+}

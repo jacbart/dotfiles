@@ -2,7 +2,7 @@ function open {
   xdg-open "$@" >/dev/null 2>&1
 }
 
-alias ls="ls -lh --color=auto" 
+alias ls="ls -lh --color=auto"
 alias la="ls -lah --color=auto"
 
 if [[ $(cat /proc/sys/kernel/osrelease | grep microsoft) ]]; then
