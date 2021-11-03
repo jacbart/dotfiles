@@ -68,10 +68,12 @@ function kc-shell() {
 }
 
 function localkube() {
+  # install k3d
+  if ! type "k3d" &> /dev/null; then
+    curl -s https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
+  fi
+  # localkube setup and removal
   if [[ "$1" == "up" ]]; then
-    if ! type "k3d" &> /dev/null; then
-      curl -s https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
-    fi
     k3d cluster create localkube --registry-create localkube-registry:0.0.0.0:5000
   elif [[ "$1" == "down" ]]; then
     k3d cluster delete localkube
