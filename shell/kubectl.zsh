@@ -74,7 +74,10 @@ function localkube() {
   fi
   # localkube setup and removal
   if [[ "$1" == "up" ]]; then
-    k3d cluster create localkube --registry-create localkube-registry:0.0.0.0:5000
+    k3d cluster create localkube \
+      --registry-create localkube-registry:0.0.0.0:5000 \
+      --port 8080:80@loadbalancer \
+      --port 8443:443@loadbalancer
   elif [[ "$1" == "down" ]]; then
     k3d cluster delete localkube
   fi
