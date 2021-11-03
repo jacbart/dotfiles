@@ -7,6 +7,7 @@ alias fw="sudo firewall-cmd"
 alias t="tmux"
 alias j="z"
 alias gs="git status"
+alias tf="terraform"
 
 
 # Platform Specific

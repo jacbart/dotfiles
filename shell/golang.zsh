@@ -1,11 +1,11 @@
-function install_golang() {
+function install_golang {
   VERSION=$1
   unameOut="$(uname -s)"
   case "${unameOut}" in
     Linux*)
       dl_url="https://golang.org/dl/go$VERSION.linux-amd64.tar.gz"
       curl -LO $dl_url
-      sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go$VERSION.linux-amd64.tar.gz
+      rm -rf /usr/local/go && tar -C /usr/local -xzf go$VERSION.linux-amd64.tar.gz
       rm go$VERSION.linux-amd64.tar.gz;;
     Darwin*)
       dl_url="https://golang.org/dl/go$VERSION.darwin-amd64.pkg"
@@ -19,6 +19,6 @@ function install_golang() {
     *)
       echo "UNKNOWN:${unameOut}";;
   esac
-}
+};
 
 install_golang $1
