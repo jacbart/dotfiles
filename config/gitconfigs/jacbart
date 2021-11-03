@@ -14,3 +14,4 @@
   cv = cz version
 [core]
   editor = nvim
+  sshCommand = "ssh -i ~/.ssh/id_personalgit"

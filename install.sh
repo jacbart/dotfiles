@@ -11,13 +11,11 @@ function install() {
         [[ -d $HOME/workspace ]] || mkdir $HOME/workspace
         [[ -d $HOME/bin ]] || mkdir $HOME/bin
         [[ -d $HOME/.ssh ]] || mkdir $HOME/.ssh
-        [[ -f $HOME/.ssh/config ]] || ln -s $HOME/.dotfiles/config/ssh.config $HOME/.ssh/config
         if [[ ! -d $HOME/.config/gitconfigs ]]; then
             mkdir -p $HOME/.config/gitconfigs
             ln -s $HOME/.dotfiles/config/gitconfigs/* $HOME/.config/gitconfigs/
             echo "run: go install github.com/theykk/git-switcher@latest"
         fi
-        [[ -f $HOME/.gitconfig ]] || ln -s $HOME/.dotfiles/config/gitconfig $HOME/.gitconfig
         [[ -f $HOME/.asdfrc ]] || ln -s $HOME/.dotfiles/config/asdfrc $HOME/.asdfrc
         [[ -f $HOME/.tool-versions ]] || ln -s $HOME/.dotfiles/config/asdf_tool-versions $HOME/.tool-versions
 
