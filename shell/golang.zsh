@@ -1,4 +1,6 @@
-function install_golang {
+#!/bin/zsh
+
+install_golang () {
   VERSION=$1
   unameOut="$(uname -s)"
   case "${unameOut}" in
