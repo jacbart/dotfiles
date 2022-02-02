@@ -1,27 +1,7 @@
 #!/bin/zsh
 
 function install() {
-    # Download dotfiles
     git clone https://github.com/jacbart/dotfiles.git $HOME/.dotfiles
-
-    # Platform Specific install Nix
-    platform=$(uname)
-    if [ "$platform" = "Darwin" ]; then
-        sh <(curl -L https://nixos.org/nix/install)
-    else
-        sh <(curl -L https://nixos.org/nix/install) --no-daemon
-    fi
-    if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi
-
-    # Install channels
-    nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-    nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
-    nix-channel --update
-
-    export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:$NIX_PATH}
-    # Install home-manager
-    nix-shell '<home-manager>' -A install
-    home-manager switch
 
     if type zsh &> /dev/null; then
         rm -f  $HOME/.zshrc
