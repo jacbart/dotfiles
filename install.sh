@@ -7,9 +7,12 @@ function install() {
     # Platform Specific install Nix
     platform=$(uname)
     if [ "$platform" = "Darwin" ]; then
-        sh <(curl -L https://nixos.org/nix/install)
+      sed -iE "s/meep/$USER/" $HOME/.dotfiles/config/home.nix
+      sed -iE "s/home\//Users\//" $HOME/.dotfiles/config/home.nix
+      sh <(curl -L https://nixos.org/nix/install)
     else
-        sh <(curl -L https://nixos.org/nix/install) --no-daemon
+      sed -i "s/meep/$USER/" $HOME/.dotfiles/config/home.nix
+      sh <(curl -L https://nixos.org/nix/install) --no-daemon
     fi
     if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi
 
