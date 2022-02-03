@@ -11,7 +11,7 @@
 # export ANDROID_SDK_ROOT=$HOME/snap/androidsdk/current/AndroidSDK
 
 # GO ENV
-#export GOPATH="$HOME/.go"
+export GOPATH="$HOME/.go"
 export GOROOT="/usr/local/go"
 export GOPRIVATE=github.com/journeyai
 
@@ -29,3 +29,6 @@ export DOCKER_BUILDKIT=1
 # nix path
 #export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
 export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:$NIX_PATH}
+
+# LUA path
+#export LUA_PATH="$HOME/.config/nvim;;"

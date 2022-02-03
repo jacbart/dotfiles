@@ -20,7 +20,6 @@
   programs.go = {
     enable = true;
     package = pkgs.go_1_17;
-    goPath = "${config.home.homeDirectory}/.go";
   };
 
   home.stateVersion = "22.05";

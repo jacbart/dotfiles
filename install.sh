@@ -43,8 +43,7 @@ function install() {
 
         if type nvim &> /dev/null; then
             [[ -d $HOME/.config/nvim ]] && rm -rf  $HOME/.config/nvim
-            mkdir -p $HOME/.config/nvim
-            ln -s $HOME/.dotfiles/config/init.vim $HOME/.config/nvim/init.vim
+            ln -s $HOME/.dotfiles/config/nvim $HOME/.config/
         fi
 
         if type tmux &> /dev/null; then
