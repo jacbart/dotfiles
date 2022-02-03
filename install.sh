@@ -21,6 +21,8 @@ function install() {
     export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:$NIX_PATH}
     # Install home-manager
     nix-shell '<home-manager>' -A install
+    rm $HOME/.config/nixpkgs/home.nix
+    ln -s $HOME/.dotfiles/config/home.nix $HOME/.config/nixpkgs/home.nix
     home-manager switch
 
     if type zsh &> /dev/null; then
