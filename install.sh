@@ -12,7 +12,7 @@ function install() {
       if type nix &> /dev/null; then
         echo "Skipping Nix install"
       else
-        sh <(curl -L https://nixos.org/nix/install)
+        sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon
       fi
     else
       sed -i "s/meep/$USER/" $HOME/.dotfiles/config/home.nix
