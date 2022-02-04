@@ -4,7 +4,7 @@ function install_nix {
   # Platform Specific install Nix
   platform=$(uname)
   if [ "$platform" = "Darwin" ]; then
-    sed -iE "s/USER/$USER/" $HOME/.dotfiles/config/home.nix
+    sed -iE "s/USER/$USER/" $HOME/.dotfiles/config/mac-home.nix
     if type nix &> /dev/null; then
       echo "Skipping Nix install"
     else
@@ -13,7 +13,7 @@ function install_nix {
       wait
     fi
   else
-    sed -i "s/USER/$USER/" $HOME/.dotfiles/config/home.nix
+    sed -i "s/USER/$USER/" $HOME/.dotfiles/config/linux-home.nix
     if type nix &> /dev/null; then
       echo "Skipping Nix install"
     else
