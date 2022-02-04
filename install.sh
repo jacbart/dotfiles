@@ -9,10 +9,18 @@ function install() {
     if [ "$platform" = "Darwin" ]; then
       sed -iE "s/meep/$USER/" $HOME/.dotfiles/config/home.nix
       sed -iE "s/home\//Users\//" $HOME/.dotfiles/config/home.nix
-      sh <(curl -L https://nixos.org/nix/install)
+      if type nix &> /dev/null; then
+        echo "Skipping Nix install"
+      else
+        sh <(curl -L https://nixos.org/nix/install)
+      fi
     else
       sed -i "s/meep/$USER/" $HOME/.dotfiles/config/home.nix
-      sh <(curl -L https://nixos.org/nix/install) --no-daemon
+      if type nix &> /dev/null; then
+        echo "Skipping Nix install"
+      else
+        sh <(curl -L https://nixos.org/nix/install) --no-daemon
+      fi
     fi
     if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi
 
