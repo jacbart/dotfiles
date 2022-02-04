@@ -1,4 +1,4 @@
-source ./nix.zsh 
+source $HOME/.dotfiles/shell/nix.zsh 
 
 export PIP_PATH="$HOME/Library/Python/3.8/lib/python/site-packages:$HOME/Library/Python/3.8/bin"
 export BREW_PATH="/opt/homebrew/bin"
