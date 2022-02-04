@@ -105,7 +105,7 @@ function install() {
 
     # Install git switcher
     export GOPATH="$HOME/.go"
-    export GOROOT="/usr/local/go"
+    export GOROOT="$HOME/.nix-profile/share/go"
     go install github.com/theykk/git-switcher@latest
   else
     echo "missing zsh"

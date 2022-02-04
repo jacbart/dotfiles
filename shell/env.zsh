@@ -12,7 +12,8 @@
 
 # GO ENV
 export GOPATH="$HOME/.go"
-export GOROOT="/usr/local/go"
+#export GOROOT="/usr/local/go"
+export GOROOT="$HOME/.nix-profile/share/go"
 export GOPRIVATE=github.com/journeyai
 
 # Cargo
