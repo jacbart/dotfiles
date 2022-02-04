@@ -26,6 +26,24 @@ require('packer').startup(function()
 			end,
 		})
 
+    -- tabs
+		use({
+			'akinsho/nvim-bufferline.lua',
+			requires = 'kyazdani42/nvim-web-devicons',
+			config = function()
+				require('bufferline').setup({
+					options = {
+						diagnostics = 'nvim_lsp',
+						separator_style = 'thick',
+						max_name_length = 30,
+						show_close_icon = false,
+						right_mouse_command = nil,
+						middle_mouse_command = 'bdelete! %d',
+					},
+				})
+			end,
+		})
+
 		use({
 			'kyazdani42/nvim-tree.lua',
 			requires = { 'kyazdani42/nvim-web-devicons' },
@@ -68,4 +86,5 @@ require('packer').startup(function()
 				end
 			end,
 		})
+    use({ 'lewis6991/impatient.nvim' })
 end)

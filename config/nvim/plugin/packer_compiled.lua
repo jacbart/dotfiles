@@ -89,6 +89,17 @@ _G.packer_plugins = {
     path = "/home/meep/.local/share/nvim/site/pack/packer/start/gruvbox",
     url = "https://github.com/gruvbox-community/gruvbox"
   },
+  ["impatient.nvim"] = {
+    loaded = true,
+    path = "/home/meep/.local/share/nvim/site/pack/packer/start/impatient.nvim",
+    url = "https://github.com/lewis6991/impatient.nvim"
+  },
+  ["nvim-bufferline.lua"] = {
+    config = { "\27LJ\2\n¡\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\foptions\1\0\0\1\0\5\20separator_style\nthick\16diagnostics\rnvim_lsp\25middle_mouse_command\16bdelete! %d\20show_close_icon\1\20max_name_length\3\30\nsetup\15bufferline\frequire\0" },
+    loaded = true,
+    path = "/home/meep/.local/share/nvim/site/pack/packer/start/nvim-bufferline.lua",
+    url = "https://github.com/akinsho/nvim-bufferline.lua"
+  },
   ["nvim-cmp"] = {
     config = { "\27LJ\2\n?\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\14configure\18m/plugins/cmp\frequire\0" },
     loaded = true,
@@ -101,7 +112,7 @@ _G.packer_plugins = {
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-tree.lua"] = {
-    config = { "\27LJ\2\n«\1\0\0\4\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0=\3\a\0025\3\b\0=\3\t\2B\0\2\1K\0\1\0\bgit\1\0\3\vignore\1\venable\2\ftimeout\3Ù\3\ffilters\1\0\1\rdotfiles\2\tview\1\0\2\nwidth\b30%\16auto_resize\1\1\0\2\18hijack_cursor\2\15auto_close\2\nsetup\14nvim-tree\frequire\0" },
+    config = { "\27LJ\2\n«\1\0\0\4\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0=\3\a\0025\3\b\0=\3\t\2B\0\2\1K\0\1\0\bgit\1\0\3\venable\2\ftimeout\3Ù\3\vignore\1\ffilters\1\0\1\rdotfiles\2\tview\1\0\2\16auto_resize\1\nwidth\b30%\1\0\2\15auto_close\2\18hijack_cursor\2\nsetup\14nvim-tree\frequire\0" },
     loaded = true,
     needs_bufread = false,
     path = "/home/meep/.local/share/nvim/site/pack/packer/opt/nvim-tree.lua",
@@ -129,12 +140,16 @@ vim.cmd [[packadd nvim-tree.lua]]
 time([[packadd for nvim-tree.lua]], false)
 -- Config for: nvim-tree.lua
 time([[Config for nvim-tree.lua]], true)
-try_loadstring("\27LJ\2\n«\1\0\0\4\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0=\3\a\0025\3\b\0=\3\t\2B\0\2\1K\0\1\0\bgit\1\0\3\vignore\1\venable\2\ftimeout\3Ù\3\ffilters\1\0\1\rdotfiles\2\tview\1\0\2\nwidth\b30%\16auto_resize\1\1\0\2\18hijack_cursor\2\15auto_close\2\nsetup\14nvim-tree\frequire\0", "config", "nvim-tree.lua")
+try_loadstring("\27LJ\2\n«\1\0\0\4\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0=\3\a\0025\3\b\0=\3\t\2B\0\2\1K\0\1\0\bgit\1\0\3\venable\2\ftimeout\3Ù\3\vignore\1\ffilters\1\0\1\rdotfiles\2\tview\1\0\2\16auto_resize\1\nwidth\b30%\1\0\2\15auto_close\2\18hijack_cursor\2\nsetup\14nvim-tree\frequire\0", "config", "nvim-tree.lua")
 time([[Config for nvim-tree.lua]], false)
 -- Config for: nvim-cmp
 time([[Config for nvim-cmp]], true)
 try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\14configure\18m/plugins/cmp\frequire\0", "config", "nvim-cmp")
 time([[Config for nvim-cmp]], false)
+-- Config for: nvim-bufferline.lua
+time([[Config for nvim-bufferline.lua]], true)
+try_loadstring("\27LJ\2\n¡\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\foptions\1\0\0\1\0\5\20separator_style\nthick\16diagnostics\rnvim_lsp\25middle_mouse_command\16bdelete! %d\20show_close_icon\1\20max_name_length\3\30\nsetup\15bufferline\frequire\0", "config", "nvim-bufferline.lua")
+time([[Config for nvim-bufferline.lua]], false)
 if should_profile then save_profiles() end
 
 end)
