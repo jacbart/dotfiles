@@ -10,7 +10,7 @@ alias lsusb="system_profiler SPUSBDataType"
 alias newmacaddr="openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//' | xargs sudo ifconfig en0 ether"
 alias showhidden="defaults write com.apple.finder AppleShowAllFiles"
 alias ctags="`brew --prefix`/bin/ctags"
-alias update="brew update && brew upgrade && update_nix_packages"
+alias update="brew update && brew upgrade && nix_update_packages"
 alias install="brew install"
 function remove() {
   brew rm $1
