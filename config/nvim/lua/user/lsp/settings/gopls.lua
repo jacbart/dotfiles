@@ -1,3 +1,4 @@
+
 local go = {}
 
 function go.un(file_name)
@@ -5,27 +6,6 @@ function go.un(file_name)
     file_name = '.'
   end
   vim.api.nvim_command('!go run '..file_name)
-end
-
-function go.add_build_tags(tags)
-  local go_config = require('tb/lsp/config').gopls
-  local current_tags = go_config.settings.gopls.buildFlags[1]
-  if not current_tags or current_tags == '' then
-    current_tags = "-tags="
-  elseif tags:sub(1, 1) ~= "," then
-    tags = ","..tags
-  end
-  go_config.settings.gopls.buildFlags = {current_tags..tags}
-
-  require('tb/lsp').update_config("gopls", go_config)
-end
-
-function go.set_build_tags(tags)
-  local go_config = require('tb/lsp/config').gopls
-
-  go_config.settings.gopls.buildFlags = {"-tags="..tags}
-
-  require('tb/lsp').update_config("gopls", go_config)
 end
 
 function go.on_save()
