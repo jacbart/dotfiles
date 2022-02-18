@@ -28,8 +28,4 @@ export PATH="$PATH:$ITSIO_PATH:$HOME_PATHS:/snap/bin:$GOROOT/bin:$GOPATH/bin:$CA
 export DOCKER_BUILDKIT=1
 
 # nix path
-#export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
-export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:$NIX_PATH}
-
-# LUA path
-#export LUA_PATH="$HOME/.config/nvim;;"
+export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:$NIX_PATH}"

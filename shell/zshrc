@@ -7,6 +7,14 @@ export DOTFILES="$HOME/.dotfiles"
 
 [[ ! -f $DOTFILES/shell/env.zsh ]] || source $DOTFILES/shell/env.zsh
 
+# Platform Specific
+platform=$(uname)
+if [ "$platform" = "Darwin" ]; then
+  [[ ! -f $DOTFILES/shell/macos.zsh ]] || source $DOTFILES/shell/macos.zsh
+else
+  [[ ! -f $DOTFILES/shell/linux.zsh ]] || source $DOTFILES/shell/linux.zsh
+fi
+
 ############
 ## ALIAS' ##
 ############
@@ -43,9 +51,20 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-if [[ ! -f $HOME/.local/share/nvim/site/autoload/plug.vim ]]; then
-  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+#########
+## NIX ##
+#########
+
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+  source $HOME/.nix-profile/etc/profile.d/nix.sh;
+  source $HOME/.dotfiles/shell/nix.zsh
 fi
+
+##########
+## ASDF ##
+##########
+
+source $HOME/.asdf/asdf.sh
 
 ###############
 
@@ -60,7 +79,7 @@ zstyle :compinstall filename "$HOME/.zshrc"
 # append completions to fpath
 fpath=(${ASDF_DIR}/completions $fpath)
 
-# auto complete
+# auto complete for ani
 [[ -f ~/.config/ani/ani.conf ]] && mkdir -p ${fpath[1]} && touch "${fpath[1]}/_ani" && ani gen completion zsh > "${fpath[1]}/_ani"
 
 # initialise completions with ZSH's compinit
@@ -84,27 +103,10 @@ bindkey '^ ' forward-word
 ## Functions ##
 ###############
 
-if type kubectl &> /dev/null; then
-  [[ ! -f $DOTFILES/shell/kubectl.zsh ]] || source $DOTFILES/shell/kubectl.zsh
-fi
-
-function kp {
-  local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
-  if [ "x$pid" != "x" ]; then
-    echo $pid | xargs kill -${1:-9}
-  fi
-}
+[ -f $DOTFILES/shell/functions.zsh ] && source $DOTFILES/shell/functions.zsh 
 
 ############
 
 source $HOME/.zshrc.local
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/jackbartlett/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jackbartlett/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/jackbartlett/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jackbartlett/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
-if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi

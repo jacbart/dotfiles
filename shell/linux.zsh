@@ -2,8 +2,6 @@ function open {
   xdg-open "$@" >/dev/null 2>&1
 }
 
-source $HOME/.dotfiles/shell/nix.zsh
-
 alias ls="ls -lh --color=auto"
 alias la="ls -lah --color=auto"
 
