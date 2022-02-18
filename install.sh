@@ -39,8 +39,7 @@ function install_home_manager {
   rm $HOME/.config/nixpkgs/home.nix
   platform=$(uname)
   if [ "$platform" = "Darwin" ]; then
-    cp $HOME/.dotfiles/config/home-manager/mac-home.nix $HOME/.dotfiles/config/current-home.nix
-    sed -iE "s/USER/$USER/" $HOME/.dotfiles/config/current-home.nix
+    sed "s/USER/$USER/" $HOME/.dotfiles/config/home-manager/mac-home.nix > $HOME/.dotfiles/config/current-home.nix
     ln -s $HOME/.dotfiles/config/current-home.nix $HOME/.config/nixpkgs/home.nix
   else
     cp $HOME/.dotfiles/config/home-manager/linux-home.nix $HOME/.dotfiles/config/current-home.nix
