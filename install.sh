@@ -100,7 +100,7 @@ function install() {
 
     if type tmux &> /dev/null; then
       echo "removing old tmux config"
-      [[ -f $HOME/.tmux.conf ]] && rm -f  $HOME/.tmux.conf
+      [[ -f $HOME/.tmux.conf ]] && rm -f $HOME/.tmux.conf
       echo "ensuring tmux package manager"
       [[ ! -d $HOME/.tmux ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
       echo "linking new tmux config"
