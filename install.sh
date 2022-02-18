@@ -89,7 +89,7 @@ function install() {
     echo "ensuring $HOME/.asdfrc"
     [[ ! -f $HOME/.asdfrc ]] && ln -s $HOME/.dotfiles/config/asdf/asdfrc $HOME/.asdfrc
     echo "ensuring $HOME/.tool-versions"
-    [[ ! -f $HOME/.tool-versions ]] && ln -s $HOME/.dotfiles/config/asdf/asdf_tool-versions $HOME/.tool-versions
+    [[ ! -f $HOME/.tool-versions ]] && ln -s $HOME/.dotfiles/config/asdf/tool-versions $HOME/.tool-versions
 
     if type nvim &> /dev/null; then
       echo "removing old neovim configs"
