@@ -87,8 +87,10 @@ function install() {
     # Setup asdf version manager configs
     [[ ! -d $HOME/.asdf ]] && git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
     echo "ensuring $HOME/.asdfrc"
+    rm $HOME/.asdfrc
     [[ ! -f $HOME/.asdfrc ]] && ln -s $HOME/.dotfiles/config/asdf/asdfrc $HOME/.asdfrc
     echo "ensuring $HOME/.tool-versions"
+    rm $HOME/.tool-versions
     [[ ! -f $HOME/.tool-versions ]] && ln -s $HOME/.dotfiles/config/asdf/asdf_tool-versions $HOME/.tool-versions
 
     if type nvim &> /dev/null; then
