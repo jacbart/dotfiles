@@ -60,6 +60,11 @@ if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
   source $HOME/.dotfiles/shell/nix.zsh
 fi
 
+if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix.sh ]; then
+  source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
+  source $HOME/.dotfiles/shell/nix.zsh
+fi
+
 ##########
 ## ASDF ##
 ##########
