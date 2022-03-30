@@ -19,15 +19,15 @@
 
   programs.go = {
     enable = true;
-    package = pkgs.go_1_17;
+    package = pkgs.go_1_18;
   };
 
   home.stateVersion = "22.05";
 
-  services.home-manager.autoUpgrade = {
-    enable = true;
-    frequency = "weekly";
-  };
+  # services.home-manager.autoUpgrade = {
+  #   enable = true;
+  #   frequency = "weekly";
+  # };
 
   programs.home-manager.enable = true;
 }
