@@ -40,6 +40,7 @@ local options = {
 }
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.opt.fillchars.eob=" "
 
 vim.opt.shortmess:append "c"
 
@@ -49,4 +50,4 @@ end
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
-vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+vim.cmd [[set formatoptions-=cro]] -- this doesn't seem to work
