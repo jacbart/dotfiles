@@ -1,7 +1,8 @@
 ## ENV
 export PIP_PATH="$HOME/Library/Python/3.8/lib/python/site-packages:$HOME/Library/Python/3.8/bin"
 export BREW_PATH="/opt/homebrew/bin"
-export PATH="$PATH:$BREW_PATH:$PIP_PATH"]
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH:$BREW_PATH:$PIP_PATH"]
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
 
 ## Alias
 alias copy="pbcopy"
