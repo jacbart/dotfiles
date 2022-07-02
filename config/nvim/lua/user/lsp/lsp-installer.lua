@@ -16,6 +16,7 @@ local servers = {
   "yamlls",
   "bashls",
   "clangd",
+  "gopls",
 }
 
 local settings = {
@@ -60,6 +61,11 @@ for _, server in pairs(servers) do
     on_attach = require("user.lsp.handlers").on_attach,
     capabilities = require("user.lsp.handlers").capabilities,
   }
+
+  if server.name == "gopls" then
+    local gopls_opts = require("user.lsp.settings.gopls")
+    opts = vim.tbl_deep_extend("force", gopls_opts, opts)
+  end
 
   if server == "jsonls" then
     local jsonls_opts = require "user.lsp.settings.jsonls"
