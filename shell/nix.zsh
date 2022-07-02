@@ -11,3 +11,8 @@ function nix_update_packages {
     home-manager switch && wait
   fi
 }
+
+alias ne="nix-env"
+alias ns="nix-shell"
+alias nc="nix-channel"
+alias hm="home-manager"
