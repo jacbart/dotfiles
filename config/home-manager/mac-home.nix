@@ -13,6 +13,7 @@
     neovim
     fd
     ripgrep
+    age
   ];
 
   programs.go = {

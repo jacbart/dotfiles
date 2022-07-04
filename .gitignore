@@ -1,1 +1,3 @@
 config/current-home.nix
+**/.env.*
+**/.env

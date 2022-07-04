@@ -2,6 +2,26 @@
 function triage() {
   namespace=${1:-default}
 
+  config=https://raw.githubusercontent.com/jacbart/dotfiles/main/config/triage/triage.yaml
+  kubectl apply -n $namespace -f $config
+  msg="waiting for pod"
+  waittime=0
+  echo -n "$msg ${waittime}s"
+  while [[ $(kubectl get -n $namespace pod/triage -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do
+    sleep 1
+    ((waittime++))
+    printf "\r$msg ${waittime}s"
+  done
+  printf "\n"
+
+  kubectl exec -n $namespace -ti triage -- /bin/zsh
+  kubectl delete -n $namespace -f $config
+}
+
+
+function triage-old() {
+  namespace=${1:-default}
+
   config=https://raw.githubusercontent.com/taybart/dotfiles/main/triage.yaml
   kubectl apply -n $namespace -f $config
   msg="waiting for pod"
