@@ -5,9 +5,6 @@ metadata:
 spec:
   containers:
   - name: triage
-      image: meepsh/toolbox:latest
-    command:
-      - sleep
-      - "3600"
+    image: meepsh/toolbox:latest
     imagePullPolicy: IfNotPresent
   restartPolicy: Always
