@@ -41,9 +41,13 @@ ohmyzsh/ohmyzsh path:plugins/kubectl
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-completions
-romkatv/powerlevel10k
 BUNDLE
 
+if type "starship" &> /dev/null; then
+  eval "$(starship init zsh)"
+fi
+
+# romkatv/powerlevel10k
 ###############
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.

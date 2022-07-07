@@ -114,6 +114,13 @@ function install() {
       ln -s $HOME/.dotfiles/config/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
     fi
 
+    if type wezterm &> /dev/null; then
+      echo "removing old wezterm config"
+      [[ -f $HOME/.wezterm.lua ]] && rm -f $HOME/.wezterm.lua
+      echo "linking new wezterm config"
+      ln -s $HOME/.dotfiles/config/wezterm/wezterm.lua $HOME/.wezterm.lua
+    fi
+
     source $HOME/.zshrc
 
     if ! type git-switcher &> /dev/null; then
