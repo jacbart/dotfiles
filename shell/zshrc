@@ -51,9 +51,9 @@ fi
 ###############
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#fi
 
 #########
 ## NIX ##
@@ -73,7 +73,11 @@ fi
 ## ASDF ##
 ##########
 
-source $HOME/.asdf/asdf.sh
+if [ -e $HOME/.asdf/asdf.sh ]; then
+  source $HOME/.asdf/asdf.sh
+  # append completions to fpath
+  fpath=(${ASDF_DIR}/completions $fpath)
+fi
 
 ###############
 
@@ -85,9 +89,6 @@ setopt autocd extendedglob notify
 bindkey -e
 zstyle :compinstall filename "$HOME/.zshrc"
 
-# append completions to fpath
-fpath=(${ASDF_DIR}/completions $fpath)
-
 # auto complete for ani
 [[ -f ~/.config/ani/ani.conf ]] && mkdir -p ${fpath[1]} && touch "${fpath[1]}/_ani" && ani gen completion zsh > "${fpath[1]}/_ani"
 
@@ -97,7 +98,7 @@ autoload -Uz compinit
 compinit
 
 if type kitty &> /dev/null; then
-    kitty + complete setup zsh | source /dev/stdin
+  kitty + complete setup zsh | source /dev/stdin
 fi
 
 # zsh-autosuggestion color highlighting and key bindings
@@ -106,7 +107,7 @@ bindkey '^E' autosuggest-accept
 bindkey '^ ' forward-word
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ###############
 ## Functions ##
