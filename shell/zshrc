@@ -43,17 +43,13 @@ zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-completions
 BUNDLE
 
+##############
+## STARSHIP ##
+##############
+
 if type "starship" &> /dev/null; then
   eval "$(starship init zsh)"
 fi
-
-# romkatv/powerlevel10k
-###############
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-#fi
 
 #########
 ## NIX ##
@@ -61,12 +57,12 @@ fi
 
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
   source $HOME/.nix-profile/etc/profile.d/nix.sh;
-  source $HOME/.dotfiles/shell/nix.zsh
+  source $DOTFILES/shell/nix.zsh
 fi
 
 if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix.sh ]; then
   source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
-  source $HOME/.dotfiles/shell/nix.zsh
+  source $DOTFILES/shell/nix.zsh
 fi
 
 ##########
@@ -77,6 +73,14 @@ if [ -e $HOME/.asdf/asdf.sh ]; then
   source $HOME/.asdf/asdf.sh
   # append completions to fpath
   fpath=(${ASDF_DIR}/completions $fpath)
+fi
+
+###################
+## BITWARDEN-CLI ##
+###################
+
+if type bw &> /dev/null; then
+  source $DOTFILES/shell/bw.zsh
 fi
 
 ###############
