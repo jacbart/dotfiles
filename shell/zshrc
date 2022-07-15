@@ -43,14 +43,6 @@ zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-completions
 BUNDLE
 
-##############
-## STARSHIP ##
-##############
-
-if type "starship" &> /dev/null; then
-  eval "$(starship init zsh)"
-fi
-
 #########
 ## NIX ##
 #########
@@ -110,14 +102,19 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff5f00"
 bindkey '^E' autosuggest-accept
 bindkey '^ ' forward-word
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 ###############
 ## Functions ##
 ###############
 
 [ -f $DOTFILES/shell/functions.zsh ] && source $DOTFILES/shell/functions.zsh 
+
+##############
+## STARSHIP ##
+##############
+
+if type "starship" &> /dev/null; then
+  eval "$(starship init zsh)"
+fi
 
 ############
 
