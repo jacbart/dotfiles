@@ -2,9 +2,10 @@ eval "$(bw completion --shell zsh); compdef _bw bw;"
 
 function bwon() {
   if ! $(bw login --check --quiet); then
-    bw login --method 3
+    bw login --method 3 --quiet
   fi
   if [ -z ${BW_SESSION+x} ]; then
+    echo "Unlock vault"
     export BW_SESSION=$(bw unlock --raw)
   fi
 }
