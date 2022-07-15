@@ -8,6 +8,7 @@ function bwon() {
     echo "Unlock vault"
     export BW_SESSION=$(bw unlock --raw)
   fi
+  bw sync --quiet
 }
 
 function bwoff() {
