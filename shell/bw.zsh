@@ -1,6 +1,21 @@
 eval "$(bw completion --shell zsh); compdef _bw bw;"
 
+function bwon() {
+  if ! $(bw login --check --quiet); then
+    bw login --method 3
+  fi
+  if [ -z ${BW_SESSION+x} ]; then
+    export BW_SESSION=$(bw unlock --raw)
+  fi
+}
+
+function bwoff() {
+  bw lock --quiet
+  unset BW_SESSION
+}
+
 function bp() {
+  bwon; wait
   if [[ $[#] == 0 ]]; then
     bw list items | jq -r '.[].name' | fzf | xargs bw get password
   elif [[ $[#] == 1 ]]; then
@@ -11,6 +26,7 @@ function bp() {
 }
 
 function bn() {
+  bwon; wait
   if [[ $[#] == 0 ]]; then
     bw list items | jq -r '.[].name' | fzf | xargs bw get notes
   elif [[ $[#] == 1 ]]; then
@@ -21,6 +37,7 @@ function bn() {
 }
 
 function send() {
+  bwon; wait
   if [[ $1 == "clean" ]]; then
     IFS=$'\n' ID_LIST=($(bw send list | jq -r '.[].id'))
 
