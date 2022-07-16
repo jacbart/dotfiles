@@ -16,6 +16,7 @@
     fd
     ripgrep
     age
+    bitwarden-cli
   ];
 
   programs.go = {
