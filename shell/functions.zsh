@@ -13,8 +13,3 @@ function tunnel {
   echo "forwarding $1..."
   \ssh -o "ExitOnForwardFailure yes" -N -R 9000:localhost:$1 root@proxy.meep.sh -i $HOME/.ssh/id_meep_web 
 }
-
-
-function fzp {
-  bw list items | jq -r '.[].name' | fzf | xargs bw get password
-}
