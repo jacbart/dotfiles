@@ -38,6 +38,17 @@ function bn() {
   fi
 }
 
+function bfields() {
+  bwon; wait
+  if [[ $[#] == 0 ]]; then
+    bw list items | jq -r '.[].name' | fzf | xargs bw get item | jq -r '. | .fields[].name,.fields[].value'
+  elif [[ $[#] == 1 ]]; then
+    bw get item $1 | jq -r '. | .fields[].name,.fields[].value'
+  else
+    echo "only one and less args allowed"
+  fi
+}
+
 function send() {
   bwon; wait
   if [[ $1 == "clean" ]]; then
