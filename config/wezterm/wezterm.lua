@@ -143,7 +143,7 @@ return {
     },
   },
   -- tmux bindings
-  leader = { key = 'b', mods = 'CTRL' },
+  leader = { key = 'b', mods = 'SUPER' },
   keys = {
     { key = ':', mods = 'LEADER', action = 'ShowLauncher' },
     {

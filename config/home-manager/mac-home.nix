@@ -19,15 +19,14 @@
 
   programs.go = {
     enable = true;
-    package = pkgs.go_1_18;
+    package = pkgs.go_1_19;
   };
 
   programs.starship = {
     enable = true;
     # Configuration written to ~/.config/starship.toml
     settings = {
-      format = "$username$hostname$sudo$directory$git_branch$git_state$git_status$fill$golang$terraform$nix_shell$cmd_duration$time$line_break$character";
-      #format = "$all";
+      format = "$username$hostname$sudo$directory$git_branch$git_state$git_status$fill$golang$terraform$nix_shell$jobs$cmd_duration$time$line_break$character";
 
       sudo = {
         disabled = false;

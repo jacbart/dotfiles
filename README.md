@@ -1,7 +1,12 @@
-# dotfiles
-its dot file what else is there to say
+# DOTFILES
 
-install zsh first the run the below command
-```bash
+## Install Script
+
+**Dependencies**  
+- zsh  
+- curl  
+
+```sh
 zsh <(curl -s https://raw.githubusercontent.com/jacbart/dotfiles/main/install.zsh)
 ```
+

@@ -12,7 +12,8 @@ function nix_update_packages {
   fi
 }
 
+alias nix-clean="nix-collect-garbage -d"
 alias ne="nix-env"
 alias ns="nix-shell"
-alias nc="nix-channel"
+alias nchan="nix-channel"
 alias hm="home-manager"
