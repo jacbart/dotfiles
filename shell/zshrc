@@ -93,9 +93,9 @@ autoload -U +X bashcompinit && bashcompinit
 autoload -Uz compinit
 compinit
 
-if type kitty &> /dev/null; then
-  kitty + complete setup zsh | source /dev/stdin
-fi
+#if type kitty &> /dev/null; then
+#  kitty + complete setup zsh | source /dev/stdin
+#fi
 
 # zsh-autosuggestion color highlighting and key bindings
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff5f00"

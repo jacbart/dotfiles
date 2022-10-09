@@ -12,7 +12,7 @@
     git
     jq
     fzf
-    neovim
+    helix
     fd
     ripgrep
     age
@@ -28,10 +28,10 @@
     enable = true;
     # Configuration written to ~/.config/starship.toml
     settings = {
-      format = "$username$hostname$sudo$directory$git_branch$git_state$git_status$fill$golang$terraform$nix_shell$jobs$cmd_duration$time$line_break$character";
+      format = "$username$hostname$sudo$directory$git_branch$git_state$git_status$fill$helm$kubernetes$golang$rust$terraform$nix_shell$jobs$cmd_duration$time$line_break$character";
 
       sudo = {
-        disabled = false;
+        disabled = true;
         style = "bold green";
         symbol = "";
         format = "[as $symbol]($style) ";
@@ -42,11 +42,11 @@
         style_root = "red bold";
         format = "[$user]($style)";
         disabled = false;
-        show_always = true;
+        show_always = false;
       };
 
       hostname = {
-        ssh_only = false;
+        ssh_only = true;
         ssh_symbol = " ";
         format = "@[$hostname]($style) ";
         style = "green bold dimmed";
@@ -78,13 +78,6 @@
       git_status = {
         format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style) ";
         style = "cyan";
-        conflicted = "​";
-        untracked = "​";
-        modified = "​";
-        staged = "​";
-        renamed = "​";
-        deleted = "​";
-        stashed = "≡";
       };
 
       git_state = {
@@ -96,6 +89,10 @@
         format = " [$symbol$version]($style)";
         symbol = " ";
       };
+      
+      rust = {
+        disabled = false;
+      };
 
       nix_shell = {
         disabled = false;
@@ -106,6 +103,19 @@
 
       terraform = {
         format = " [$symbol$version $workspace]($style)";
+      };
+
+      helm = {
+        format = " via [⎈ $version](bold white) ";
+      };
+
+      kubernetes = {
+        format = "";
+        disabled = true;
+      };
+      
+      jobs = {
+        disabled = false;
       };
 
       cmd_duration = {
@@ -123,10 +133,6 @@
 
   home.stateVersion = "22.05";
 
-  # services.home-manager.autoUpgrade = {
-  #   enable = true;
-  #   frequency = "weekly";
-  # };
 
   programs.home-manager.enable = true;
 }

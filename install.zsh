@@ -96,6 +96,13 @@ function install() {
       echo "linking new neovim configs"
       ln -s $HOME/.dotfiles/config/nvim $HOME/.config/
     fi
+    
+    if type hx &> /dev/null; then
+      echo "removing old helix config"
+      [[ -d $HOME/.config/helix ]] && rm -rf $HOME/.config/helix
+      echo "linking new helix configs"
+      ln -s $HOME/.dotfiles/config/helix $HOME/.config/
+    fi
 
     if type tmux &> /dev/null; then
       echo "removing old tmux config"
