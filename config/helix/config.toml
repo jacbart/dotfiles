@@ -1,8 +1,11 @@
 theme = "ayu_dark"
 
 [editor]
+shell = ["zsh", "-c"]
 line-number = "absolute"
 mouse = true
+color-modes = true
+# bufferline = "multiple"
 
 [editor.statusline]
 left = ["mode", "spinner"]
@@ -19,5 +22,22 @@ select = "underline"
 hidden = false
 git-ignore = false
 
-[editor.whitespace]
-render = "none"
+[editor.whitespace.render]
+space = "all"
+tab = "all"
+newline = "none"
+
+[editor.whitespace.characters]
+space = "·"
+nbsp = "⍽"
+tab = "→"
+newline = "⏎"
+tabpad = "·"
+
+[editor.lsp]
+display-messages = true
+
+[editor.indent-guides]
+render = true
+character = "╎"
+skip-levels = 1

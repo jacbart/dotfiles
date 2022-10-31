@@ -9,9 +9,12 @@ function kp {
   fi
 }
 
-function tunnel {
-  echo "forwarding $1..."
-  \ssh -o "ExitOnForwardFailure yes" -N -R 9000:localhost:$1 root@proxy.meep.sh -i $HOME/.ssh/id_meep_web 
+TUNNEL=
+INTERNAL_PORT=9000
+tunnel () {
+        echo "forwarding $1..." 
+        \ssh root@$TUNNEL 'pkill -o -u $USER sshd'
+        \ssh -o "ExitOnForwardFailure yes" -N -R $INTERNAL_PORT:localhost:$1 root@$TUNNEL
 }
 
 function koion {
@@ -27,3 +30,6 @@ function koi-op {
 }
 #alias koi=koi-op
 
+function rundocker() {
+  docker run --rm "$@" $(docker build -q .)
+}

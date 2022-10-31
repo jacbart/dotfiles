@@ -1,0 +1,4 @@
+[[language]]
+name = "hcl"
+file-types = ["tf", "tfvars", "hcl", "koi"]
+auto-format = true
