@@ -7,16 +7,15 @@
   targets.genericLinux.enable = true;
 
   home.packages = with pkgs; [
-    htop
-    tmux
-    git
-    jq
-    fzf
-    helix
-    fd
-    ripgrep
     age
     bitwarden-cli
+    fd
+    fzf
+    git
+    helix
+    htop
+    jq
+    ripgrep
   ];
 
   programs.go = {
@@ -132,7 +131,6 @@
   };
 
   home.stateVersion = "22.05";
-
 
   programs.home-manager.enable = true;
 }

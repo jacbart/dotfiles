@@ -4,9 +4,6 @@ local go = {}
 vim.cmd[[
 augroup golsp
 au!
-"FileType go command! -nargs=+ BuildTags lua require("lsp/go").set_build_tags(<f-args>)
-"FileType go command! -nargs=+ BuildTagsAdd lua require("lsp/go").add_build_tags(<f-args>)
-"FileType go command! -nargs=* StructTags lua require("lsp/go").add_tags(<f-args>) 
 au FileType go command! -nargs=? Run lua require("user/lsp/settings/gopls").run(<f-args>) 
 au BufWritePre *.go lua require("user/lsp/settings/gopls").on_save() 
 augroup end

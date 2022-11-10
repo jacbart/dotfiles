@@ -13,5 +13,5 @@
   cl = cz changelog
   cv = cz version
 [core]
-  editor = nvim
+  editor = hx
   sshCommand = "ssh -i ~/.ssh/id_gitpersonal"

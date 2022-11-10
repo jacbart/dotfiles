@@ -5,16 +5,15 @@
   home.homeDirectory = "/Users/${config.home.username}";
 
   home.packages = with pkgs; [
-    htop
-    tmux
-    git
-    jq
-    fzf
-    helix
-    fd
-    ripgrep
     age
     bitwarden-cli
+    fd
+    fzf
+    git
+    helix
+    htop
+    jq
+    ripgrep
   ];
 
   programs.go = {
