@@ -1,3 +1,9 @@
+###################
+## ZSH Profiling ##
+###################
+
+#zmodload zsh/zprof
+
 ###############
 ## Variables ##
 ###############
@@ -25,19 +31,18 @@ fi
 ## ANTIBODY ##
 ##############
 
+function zsh_plugin_refresh() {
+  antibody bundle < $DOTFILES/shell/antibody_plugins.txt > $HOME/.antibody_plugins.sh
+  chmod +x $HOME/.antibody_plugins.sh
+}
+
 if ! type "antibody" &> /dev/null; then
   $DOTFILES/shell/get_antibody.sh -b $HOME/.local/bin
+  zsh_plugin_refresh
 fi
 
-source <(antibody init)
-antibody bundle <<BUNDLE
-ohmyzsh/ohmyzsh
-ohmyzsh/ohmyzsh path:plugins/z
-ohmyzsh/ohmyzsh path:plugins/fzf
-zsh-users/zsh-autosuggestions
-zsh-users/zsh-syntax-highlighting
-zsh-users/zsh-completions
-BUNDLE
+
+source $HOME/.antibody_plugins.sh
 
 #########
 ## NIX ##
@@ -85,9 +90,12 @@ zstyle :compinstall filename "$HOME/.zshrc"
 [[ -f ~/.config/ani/ani.conf ]] && mkdir -p ${fpath[1]} && touch "${fpath[1]}/_ani" && ani gen completion zsh > "${fpath[1]}/_ani"
 
 # initialise completions with ZSH's compinit
-autoload -U +X bashcompinit && bashcompinit
 autoload -Uz compinit
-compinit
+if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
+  compinit
+else
+  compinit -C
+fi
 
 #if type kitty &> /dev/null; then
 #  kitty + complete setup zsh | source /dev/stdin
@@ -118,3 +126,8 @@ source $HOME/.zshrc.local
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+###################
+## ZSH Profiling ##
+###################
+
+#zprof

@@ -1,0 +1,6 @@
+ohmyzsh/ohmyzsh
+ohmyzsh/ohmyzsh path:plugins/z
+ohmyzsh/ohmyzsh path:plugins/fzf
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-completions

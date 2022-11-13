@@ -1,4 +1,4 @@
-eval "$(bw completion --shell zsh); compdef _bw bw;"
+#eval "$(bw completion --shell zsh); compdef _bw bw;"
 
 function bwon() {
   if ! $(bw login --check --quiet); then
