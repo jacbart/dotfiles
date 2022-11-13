@@ -91,7 +91,8 @@ zstyle :compinstall filename "$HOME/.zshrc"
 
 # initialise completions with ZSH's compinit
 autoload -Uz compinit
-if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
+zcomp_date=$(date -d "@$(stat -c '%Y' ~/.zcompdump)" +'%j')
+if [ $(date +'%j') != $zcomp_date ]; then
   compinit
 else
   compinit -C
