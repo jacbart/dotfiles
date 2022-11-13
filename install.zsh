@@ -84,8 +84,8 @@ function install() {
     fi
 
     # Setup asdf version manager configs
-    [[ ! -d $HOME/.asdf ]] && git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
-    echo "ensuring $HOME/.asdfrc"
+    # [[ ! -d $HOME/.asdf ]] && git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
+    # echo "ensuring $HOME/.asdfrc"
     [[ ! -f $HOME/.asdfrc ]] && ln -s $HOME/.dotfiles/config/asdf/asdfrc $HOME/.asdfrc
     echo "ensuring $HOME/.tool-versions"
     [[ ! -f $HOME/.tool-versions ]] && ln -s $HOME/.dotfiles/config/asdf/tool-versions $HOME/.tool-versions

@@ -63,8 +63,9 @@ fi
 ## ASDF ##
 ##########
 
-if [ -e $HOME/.asdf/asdf.sh ]; then
-  source $HOME/.asdf/asdf.sh
+if type asdf &> /dev/null; then
+  asdf_source=$(readlink -f $(which asdf) | sed 's/bin\/asdf/share\/asdf-vm\/asdf.sh/')
+  source $asdf_source
   # append completions to fpath
   fpath=(${ASDF_DIR}/completions $fpath)
 fi
@@ -88,7 +89,7 @@ bindkey -e
 zstyle :compinstall filename "$HOME/.zshrc"
 
 # auto complete for ani
-[[ -f ~/.config/ani/ani.conf ]] && mkdir -p ${fpath[1]} && touch "${fpath[1]}/_ani" && ani gen completion zsh > "${fpath[1]}/_ani"
+#[[ -f ~/.config/ani/ani.conf ]] && mkdir -p ${fpath[1]} && touch "${fpath[1]}/_ani" && ani gen completion zsh > "${fpath[1]}/_ani"
 
 # initialise completions with ZSH's compinit
 if [ "$platform" = "Darwin" ]; then

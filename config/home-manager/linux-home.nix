@@ -8,6 +8,7 @@
 
   home.packages = with pkgs; [
     age
+    asdf-vm
     bitwarden-cli
     fd
     fzf
