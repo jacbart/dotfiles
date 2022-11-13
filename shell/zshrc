@@ -90,8 +90,13 @@ zstyle :compinstall filename "$HOME/.zshrc"
 [[ -f ~/.config/ani/ani.conf ]] && mkdir -p ${fpath[1]} && touch "${fpath[1]}/_ani" && ani gen completion zsh > "${fpath[1]}/_ani"
 
 # initialise completions with ZSH's compinit
+if [ "$platform" = "Darwin" ]; then
+  zcomp_date=$(stat -f '%Sm' -t '%j' ~/.zcompdump)
+else
+  zcomp_date=$(date -d "@$(stat -c '%Y' ~/.zcompdump)" +'%j')
+fi
+
 autoload -Uz compinit
-zcomp_date=$(date -d "@$(stat -c '%Y' ~/.zcompdump)" +'%j')
 if [ $(date +'%j') != $zcomp_date ]; then
   compinit
 else
