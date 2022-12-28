@@ -5,6 +5,8 @@
   default = current
 [url "git@github.com:journeyai"]
   insteadOf = https://github.com/journeyai
+[url "git@github.com:journeyid"]
+  insteadOf = https://github.com/journeyid
 [pull]
   rebase = false
 [alias]

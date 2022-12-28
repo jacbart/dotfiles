@@ -17,7 +17,6 @@ local colors = {
 --local SOLID_RIGHT_ARROW = utf8.char(0xe0b0) -- The  symbol
 --local SOLID_LEFT_ARROW = utf8.char(0xe0b2) -- The  symbol
 
--- nightly
 -- Sets the title of the active tab in the current window.
 -- This method is intended to be called from the debug overlay repl
 function set_tab_title(title)
@@ -31,12 +30,7 @@ function set_tab_title(title)
     if tab_info.is_active then
       -- Set the title and log something to indicate the changes that we made
       tab_info.tab:set_title(title)
-      wezterm.log_info(
-        'Changed title for tab '
-          .. tostring(tab_info.tab:tab_id())
-          .. ' to '
-          .. tab_info.tab:get_title()
-      )
+      wezterm.log_info("Changed title for tab " .. tostring(tab_info.tab:tab_id()) .. " to " .. tab_info.tab:get_title())
       break
     end
   end
