@@ -70,6 +70,8 @@ function install() {
     # Adding common directories
     echo "ensuring $HOME/workspace"
     [[ ! -d $HOME/workspace ]] && mkdir $HOME/workspace
+    echo "ensuring $HOME/workspace/personal/notes"
+    [[ ! -d $HOME/workspace/personal/notes ]] && mkdir -p $HOME/workspace/personal/notes
     echo "ensuring $HOME/bin"
     [[ ! -d $HOME/bin ]] && mkdir $HOME/bin
     echo "ensuring $HOME/.ssh"
