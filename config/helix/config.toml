@@ -23,8 +23,8 @@ hidden = false
 git-ignore = false
 
 [editor.whitespace.render]
-space = "all"
-tab = "all"
+space = "none"
+tab = "none"
 newline = "none"
 
 [editor.whitespace.characters]
