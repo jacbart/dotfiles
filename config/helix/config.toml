@@ -5,7 +5,8 @@ shell = ["zsh", "-c"]
 line-number = "absolute"
 mouse = true
 color-modes = true
-# bufferline = "multiple"
+auto-pairs = true
+bufferline = "multiple"
 
 [editor.statusline]
 left = ["mode", "spinner"]
@@ -20,7 +21,7 @@ select = "underline"
 
 [editor.file-picker]
 hidden = false
-git-ignore = false
+git-ignore = true
 
 [editor.whitespace.render]
 space = "none"
