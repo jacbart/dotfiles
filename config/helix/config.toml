@@ -7,6 +7,8 @@ mouse = true
 color-modes = true
 auto-pairs = true
 bufferline = "multiple"
+auto-completion = true
+auto-format = true
 
 [editor.statusline]
 left = ["mode", "spinner"]

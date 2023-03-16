@@ -36,7 +36,7 @@ function install_home_manager {
     nix-shell '<home-manager>' -A install
   fi
   # Platform Specific home.nix linking
-  rm $HOME/.config/nixpkgs/home.nix
+  rm $HOME/.config/home-manager/home.nix
   platform=$(uname)
   if [ "$platform" = "Darwin" ]; then
     sed "s/USER/$USER/" $HOME/.dotfiles/config/home-manager/mac-home.nix > $HOME/.dotfiles/config/current-home.nix
