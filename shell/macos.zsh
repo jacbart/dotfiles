@@ -14,6 +14,7 @@ alias showhidden="defaults write com.apple.finder AppleShowAllFiles"
 alias ctags="`brew --prefix`/bin/ctags"
 alias update="brew update && brew upgrade && nix_update_packages"
 alias install="brew install"
+alias lastbackup="defaults read /Library/Preferences/com.apple.TimeMachine | grep ReferenceLocalSnapshotDate | awk '{print \$3}' | cut -d '\"' -f 2"
 
 function remove() {
   brew rm $1
