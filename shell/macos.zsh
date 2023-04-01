@@ -16,6 +16,7 @@ alias update="brew update && brew upgrade && nix_update_packages"
 alias install="brew install"
 alias lastbackup="defaults read /Library/Preferences/com.apple.TimeMachine | rg ReferenceLocalSnapshotDate | awk '{print \$3}' | cut -d '\"' -f 2"
 
+## Functions
 function cecho() {
   local code="\033["
   case "$1" in
@@ -35,27 +36,16 @@ function cecho() {
 
 function lastm() {
   local last=`defaults read /Library/Preferences/com.apple.TimeMachine | rg ReferenceLocalSnapshotDate | awk '{print $3}' | cut -d '"' -f 2`
+  local last_days=`date -j -f '%Y-%m-%d' "$last" '+%s' | awk '{print int($1/86400)}'`
   local today=`date "+%Y-%m-%d"`
-  local last=("${(@s/-/)last}")
-  local today=("${(@s/-/)today}")
-  local u=("year(s)" "month(s)" "day(s)")
-  local uptodate=1
-  for i in {1..3}; do
-    if [[ "$today[$i]" > "$last[$i]"  ]]; then
-      uptodate=0
-      local diff=`expr $today[i] - $last[i]`
-      if [[ "$i" == '3' ]]; then
-        cecho y "$last[1]-$last[2]-$last[3] [$diff $u[$i] ago]"
-        break
-      else
-        cecho r "$last[1]-$last[2]-$last[3] [$diff $u[$i] ago]"
-        break
-      fi
-    fi
-  done
-
-  if [[ "$uptodate" == '1' ]]; then
-    echo "$last[1]-$last[2]-$last[3]"
+  local today_days=`date -j -f '%Y-%m-%d' "$today" '+%s' | awk '{print int($1/86400)}'`
+  local diff=`expr $today_days - $last_days`
+  if [[ "$diff" -eq 0 ]]; then
+    echo $last
+  elif [[ "$diff" -le 7 ]]; then
+    cecho y "$last [$diff day(s) ago]"
+  else
+    cecho r "$last [$diff day(s) ago]"
   fi
 }
 
