@@ -1,7 +1,8 @@
 # GO ENV
 export GOPATH="$HOME/.go"
 #export GOROOT="/usr/local/go"
-export GOROOT="$HOME/.nix-profile/share/go"
+#export GOROOT="$HOME/.nix-profile/share/go"
+#export GOROOT="/etc/profiles/per-user/meep/bin/go"
 export GOPRIVATE="github.com/journeyai,github.com/journeyid"
 
 # Cargo

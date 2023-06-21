@@ -12,8 +12,13 @@ function nix_update_packages {
   fi
 }
 
+function nixos_rebuild {
+  cd $DOTFILES/config/nix
+  sudo nixos-rebuild switch --flake '.#boojum'
+}
+
 alias nix-clean="nix-collect-garbage -d"
 alias ne="nix-env"
-alias ns="nix-shell"
+alias ns="nix shell"
 alias nchan="nix-channel"
 alias hm="home-manager"

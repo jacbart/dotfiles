@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "USER";
+  home.username = "meep";
   home.homeDirectory = "/home/${config.home.username}";
 
   targets.genericLinux.enable = true;
@@ -21,7 +21,7 @@
 
   programs.go = {
     enable = true;
-    package = pkgs.go_1_19;
+    package = pkgs.go;
   };
 
   programs.starship = {
