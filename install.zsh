@@ -92,12 +92,12 @@ function install() {
     echo "ensuring $HOME/.tool-versions"
     [[ ! -f $HOME/.tool-versions ]] && ln -s $HOME/.dotfiles/config/asdf/tool-versions $HOME/.tool-versions
 
-    if type nvim &> /dev/null; then
-      echo "removing old neovim configs"
-      [[ -d $HOME/.config/nvim ]] && rm -rf  $HOME/.config/nvim
-      echo "linking new neovim configs"
-      ln -s $HOME/.dotfiles/config/nvim $HOME/.config/
-    fi
+    # if type nvim &> /dev/null; then
+    #   echo "removing old neovim configs"
+    #   [[ -d $HOME/.config/nvim ]] && rm -rf  $HOME/.config/nvim
+    #   echo "linking new neovim configs"
+    #   ln -s $HOME/.dotfiles/config/nvim $HOME/.config/
+    # fi
     
     if type hx &> /dev/null; then
       echo "removing old helix config"
@@ -129,6 +129,11 @@ function install() {
       echo "linking new wezterm config"
       ln -s $HOME/.dotfiles/config/wezterm/wezterm.lua $HOME/.wezterm.lua
     fi
+
+    if ! type "antibody" &> /dev/null; then
+      antibody bundle < $DOTFILES/shell/antibody_plugins.txt > $HOME/.antibody_plugins.sh
+      chmod +x $HOME/.antibody_plugin.sh
+    fi 
 
     source $HOME/.zshrc
 
