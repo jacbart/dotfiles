@@ -40,11 +40,11 @@ function install_home_manager {
   platform=$(uname)
   if [ "$platform" = "Darwin" ]; then
     sed "s/USER/$USER/" $HOME/.dotfiles/config/home-manager/mac-home.nix > $HOME/.dotfiles/config/current-home.nix
-    ln -s $HOME/.dotfiles/config/current-home.nix $HOME/.config/nixpkgs/home.nix
+    ln -s $HOME/.dotfiles/config/current-home.nix $HOME/.config/home-manager/home.nix
   else
     cp $HOME/.dotfiles/config/home-manager/linux-home.nix $HOME/.dotfiles/config/current-home.nix
     sed -i "s/USER/$USER/" $HOME/.dotfiles/config/current-home.nix
-    ln -s $HOME/.dotfiles/config/current-home.nix $HOME/.config/nixpkgs/home.nix
+    ln -s $HOME/.dotfiles/config/current-home.nix $HOME/.config/home-manager/home.nix
   fi
   
   home-manager build && wait

@@ -17,6 +17,7 @@ alias install="brew install"
 alias lastbackup="defaults read /Library/Preferences/com.apple.TimeMachine | rg ReferenceLocalSnapshotDate | awk '{print \$3}' | cut -d '\"' -f 2"
 
 ## Functions
+# colored echo func
 function cecho() {
   local code="\033["
   case "$1" in
@@ -34,6 +35,7 @@ function cecho() {
   echo "$text"
 }
 
+# get the last date timemachine was run
 function lastm() {
   local last=`defaults read /Library/Preferences/com.apple.TimeMachine | rg ReferenceLocalSnapshotDate | awk '{print $3}' | cut -d '"' -f 2`
   local last_days=`date -j -f '%Y-%m-%d' "$last" '+%s' | awk '{print int($1/86400)}'`

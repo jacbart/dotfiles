@@ -23,7 +23,7 @@ function bp() {
   elif [[ $[#] == 1 ]]; then
     bw get password $1
   else
-    echo "only one and less args allowed"
+    echo "one or less args allowed"
   fi
 }
 
