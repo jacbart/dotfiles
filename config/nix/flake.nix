@@ -1,5 +1,5 @@
 {
-  description = "NixOS Configuration";
+  description = "NixOS/Home Manager Configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -25,7 +25,7 @@
             home-manager = {
               useUserPackages = true;
               useGlobalPkgs = true;
-              users.meep = ./home-manager/home.nix;
+              users.meep = import ./home-manager/home.nix;
             };
           }
         ];

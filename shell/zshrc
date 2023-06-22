@@ -11,6 +11,7 @@
 
 export TERM=xterm-256color
 export DOTFILES="$HOME/.dotfiles"
+export DISTRO_ID=$(cat /etc/*release | grep '^ID=' | sed 's/^ID=*//')
 
 [[ ! -f $DOTFILES/shell/env.zsh ]] || source $DOTFILES/shell/env.zsh
 
@@ -59,8 +60,7 @@ if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix.sh ]; then
   source $DOTFILES/shell/nix.zsh
 fi
 
-DISTRO=$(cat /etc/*release | grep '^NAME=' | sed 's/^NAME=*//')
-if [ "$DISTRO" = "NixOS" ]; then
+if [ "$DISTRO_ID" = "nixos" ]; then
   source $DOTFILES/shell/nix.zsh
 fi
 

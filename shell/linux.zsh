@@ -34,4 +34,14 @@ elif [ -f /etc/alpine-release ]; then
   alias update="sudo apk update && nix_update_packages"
   alias install="sudo apk add"
   alias remove="sudo apk del"
+elif [ -f /etc/os-release ]; then
+  if [ "$DISTRO_ID" = "nixos" ]; then
+    alias update="sudo nix-channel --update && nixos_rebuild"
+    alias install="nix-env -iA"
+    alias remove="nix-env -e"
+    alias clean="sudo nix-collect-garbage -d"
+    alias list="nix-env -q --description"
+    alias listGen="sudo nix-env -p /nix/var/nix/profiles/system --list-generations"
+    alias cleanGen="nix-collect-garbage --delete-generations"
+  fi
 fi

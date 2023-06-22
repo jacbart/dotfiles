@@ -7,6 +7,7 @@
   targets.genericLinux.enable = true;
 
   home.packages = with pkgs; [
+    antibody
     age
     asdf-vm
     bitwarden-cli
