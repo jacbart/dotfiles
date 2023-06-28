@@ -11,7 +11,6 @@
 
 export TERM=xterm-256color
 export DOTFILES="$HOME/.dotfiles"
-export DISTRO_ID=$(cat /etc/*release | grep '^ID=' | sed 's/^ID=*//')
 
 [[ ! -f $DOTFILES/shell/env.zsh ]] || source $DOTFILES/shell/env.zsh
 
@@ -20,7 +19,16 @@ platform=$(uname)
 if [ "$platform" = "Darwin" ]; then
   [[ ! -f $DOTFILES/shell/macos.zsh ]] || source $DOTFILES/shell/macos.zsh
 else
+  # get linux distro ID
+  export DISTRO_ID=$(cat /etc/*release | grep '^ID=' | sed 's/^ID=*//')
+
+  # load linux shell alias' and funcs
   [[ ! -f $DOTFILES/shell/linux.zsh ]] || source $DOTFILES/shell/linux.zsh
+
+  # if os is NixOS
+  if [ "$DISTRO_ID" = "nixos" ]; then
+    source $DOTFILES/shell/nix.zsh
+  fi
 fi
 
 ############
@@ -57,10 +65,6 @@ fi
 
 if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix.sh ]; then
   source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
-  source $DOTFILES/shell/nix.zsh
-fi
-
-if [ "$DISTRO_ID" = "nixos" ]; then
   source $DOTFILES/shell/nix.zsh
 fi
 
