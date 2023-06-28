@@ -3,8 +3,8 @@ function nix_update_packages {
     nix-channel --update && wait
   fi
 
-  if type nix-env &> /dev/null; then
-    nix-env -u && wait
+  if type nix &> /dev/null; then
+    nix profile upgrade '.*' && wait
   fi
 
   if type home-manager &> /dev/null; then
@@ -13,12 +13,9 @@ function nix_update_packages {
 }
 
 function nixos_rebuild {
-  cd $DOTFILES/config/nix
+  pushd $DOTFILES/config/nix &> /dev/null
   sudo nixos-rebuild switch --flake '.#boojum'
+  popd &> /dev/null
 }
 
-alias nix-clean="nix-collect-garbage -d"
-alias ne="nix-env"
-alias ns="nix shell"
-alias nchan="nix-channel"
 alias hm="home-manager"

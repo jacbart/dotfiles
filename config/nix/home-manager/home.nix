@@ -30,6 +30,7 @@
     # Configuration written to ~/.config/starship.toml
     settings = {
       format = "$username$hostname$sudo$directory$git_branch$git_state$git_status$fill$helm$kubernetes$golang$rust$terraform$nix_shell$jobs$cmd_duration$time$line_break$character";
+      command_timeout = 1000;
 
       sudo = {
         disabled = true;
