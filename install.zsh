@@ -16,6 +16,9 @@ function install_nix {
       wait
     fi
   fi
+  if [ ! -e $HOME/.config/nix/nix.conf ]; then
+    ln -s $HOME/.dotfiles/config/nix/config $HOME/.config/nix
+  fi
   if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
     source $HOME/.nix-profile/etc/profile.d/nix.sh;
   fi
