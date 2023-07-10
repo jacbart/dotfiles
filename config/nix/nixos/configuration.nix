@@ -3,7 +3,9 @@
 {
   imports =
     [
-      ./hardware-configuration.nix
+      ./modules/boojum-hardware.nix
+      ./modules/upgrade-diff.nix
+      # ./modules/wireguard-mesquite.nix
     ];
 
   # Bootloader.

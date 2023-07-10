@@ -43,6 +43,6 @@ elif [ -f /etc/os-release ]; then
     alias remove="nix profile remove"
     alias clean="nix-collect-garbage -d && nix store optimise"
     alias gen-list="sudo nix-env -p /nix/var/nix/profiles/system --list-generations"
-    alias gen-clean="nix-env --delete-generations +3"
+    alias gen-clean="sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +3"
   fi
 fi

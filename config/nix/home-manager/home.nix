@@ -5,19 +5,24 @@
   home.homeDirectory = "/home/${config.home.username}";
 
   targets.genericLinux.enable = true;
+  nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
     antibody
     age
     asdf-vm
+    bitwarden
     bitwarden-cli
     fd
     fzf
     git
+    insomnia
     helix
     htop
     jq
     ripgrep
+    slack
+    vscode
   ];
 
   programs.go = {
