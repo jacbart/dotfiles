@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "meep";
+  home.username = "USER";
   home.homeDirectory = "/home/${config.home.username}";
 
   targets.genericLinux.enable = true;

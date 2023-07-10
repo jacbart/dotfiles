@@ -16,6 +16,9 @@ function install_nix {
       wait
     fi
   fi
+  if [ ! -e $HOME/.config/nix/nix.conf ]; then
+    ln -s $HOME/.dotfiles/config/nix/config $HOME/.config/nix
+  fi
   if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
     source $HOME/.nix-profile/etc/profile.d/nix.sh;
   fi
@@ -36,19 +39,19 @@ function install_home_manager {
     nix-shell '<home-manager>' -A install
   fi
   # Platform Specific home.nix linking
-  # rm $HOME/.config/home-manager/home.nix
-  # platform=$(uname)
-  # if [ "$platform" = "Darwin" ]; then
-  #   sed "s/USER/$USER/" $HOME/.dotfiles/config/home-manager/mac-home.nix > $HOME/.dotfiles/config/current-home.nix
-  #   ln -s $HOME/.dotfiles/config/current-home.nix $HOME/.config/home-manager/home.nix
-  # else
-  #   cp $HOME/.dotfiles/config/home-manager/linux-home.nix $HOME/.dotfiles/config/current-home.nix
-  #   sed -i "s/USER/$USER/" $HOME/.dotfiles/config/current-home.nix
-  #   ln -s $HOME/.dotfiles/config/current-home.nix $HOME/.config/home-manager/home.nix
-  # fi
+  rm $HOME/.config/home-manager/home.nix
+  platform=$(uname)
+  if [ "$platform" = "Darwin" ]; then
+    sed "s/USER/$USER/" $HOME/.dotfiles/config/nix/home-manager/home.nix > $HOME/.dotfiles/config/current-home.nix
+    ln -s $HOME/.dotfiles/config/current-home.nix $HOME/.config/home-manager/home.nix
+  else
+    cp $HOME/.dotfiles/config/nix/home-manager/home.nix $HOME/.dotfiles/config/current-home.nix
+    sed -i "s/USER/$USER/" $HOME/.dotfiles/config/current-home.nix
+    ln -s $HOME/.dotfiles/config/current-home.nix $HOME/.config/home-manager/home.nix
+  fi
   
-  # home-manager build && wait
-  # home-manager switch && wait
+  home-manager build && wait
+  home-manager switch && wait
 }
 
 function install() {
