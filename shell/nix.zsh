@@ -13,8 +13,9 @@ function nix_update_packages {
 }
 
 function nixos_rebuild {
+  HOSTNAME=$(hostnamectl hostname)
   pushd $DOTFILES/config/nix &> /dev/null
-  sudo nixos-rebuild switch --flake '.#boojum'
+  sudo nixos-rebuild switch --flake ".#$HOSTNAME"
   popd &> /dev/null
 }
 

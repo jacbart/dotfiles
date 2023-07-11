@@ -25,6 +25,9 @@
     vscode
   ];
 
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
+
   programs.go = {
     enable = true;
     package = pkgs.go;

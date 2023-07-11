@@ -145,6 +145,14 @@ if type "starship" &> /dev/null; then
 fi
 
 ############
+## DIRENV ##
+############
+
+if type "direnv" &> /dev/null; then
+  eval "$(direnv hook zsh)"
+fi
+
+############
 
 # add any overrides to .zshrc.local
 source $HOME/.zshrc.local
