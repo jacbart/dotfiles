@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "USER";
+  home.username = "meep";
   home.homeDirectory = "/home/${config.home.username}";
 
   targets.genericLinux.enable = true;
@@ -11,18 +11,14 @@
     antibody
     age
     asdf-vm
-    bitwarden
     bitwarden-cli
     fd
     fzf
     git
-    insomnia
     helix
     htop
     jq
     ripgrep
-    slack
-    vscode
   ];
 
   programs.direnv.enable = true;

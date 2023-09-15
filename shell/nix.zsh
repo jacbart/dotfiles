@@ -15,6 +15,7 @@ function nix_update_packages {
 function nixos_rebuild {
   HOSTNAME=$(hostnamectl hostname)
   pushd $DOTFILES/config/nix &> /dev/null
+  nix flake lock --update-input nixpkgs
   sudo nixos-rebuild switch --flake ".#$HOSTNAME"
   popd &> /dev/null
 }

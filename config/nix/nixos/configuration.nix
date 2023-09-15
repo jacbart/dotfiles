@@ -91,11 +91,15 @@
       firefox
       xclip
       gnomeExtensions.caffeine
+      bitwarden
+      insomnia
+      slack
+      vscode
     ];
   };
 
   # Add Jet Brains Mono as a font
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
