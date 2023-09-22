@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 {
   imports =
@@ -92,9 +92,23 @@
       xclip
       gnomeExtensions.caffeine
       bitwarden
-      insomnia
-      slack
       vscode
+      (vscode-with-extensions.override {
+        vscodeExtensions = with vscode-extensions; [
+          serayuzgur.crates
+          rust-lang.rust-analyzer
+          tamasfe.even-better-toml
+          github.copilot
+          bbenoist.nix
+        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          {
+            name = "slint";
+            publisher = "slint";
+            version = "1.2.1";
+            sha256 = "";
+          }
+        ];
+      })
     ];
   };
 

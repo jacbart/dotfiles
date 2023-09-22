@@ -19,7 +19,7 @@
       boojum = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          ./nixos/configuration.nix
+          (import ./nixos/configuration.nix)
           home-manager.nixosModules.home-manager
           {
             home-manager = {

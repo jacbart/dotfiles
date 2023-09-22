@@ -10,7 +10,6 @@
   home.packages = with pkgs; [
     antibody
     age
-    asdf-vm
     bitwarden-cli
     fd
     fzf
@@ -137,7 +136,7 @@
     };
   };
 
-  home.stateVersion = "22.05";
+  home.stateVersion = "23.05";
 
   programs.home-manager.enable = true;
 }
