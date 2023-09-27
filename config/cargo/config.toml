@@ -2,10 +2,21 @@
 linker = "clang"
 rustflags = ["-C", "link-arg=-fuse-ld=mold"]
 
+# [target.x86_64-apple-darwin]
+# linker = "clang"
+# rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+
+# [target.aarch64-apple-darwin]
+# linker = "clang"
+# rustflags = ["-C", "link-arg=-fuse-ld=mold"]
 [target.x86_64-apple-darwin]
-linker = "clang"
-rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+rustflags = [
+  "-C", "link-arg=-undefined",
+  "-C", "link-arg=dynamic_lookup",
+]
 
 [target.aarch64-apple-darwin]
-linker = "clang"
-rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+rustflags = [
+  "-C", "link-arg=-undefined",
+  "-C", "link-arg=dynamic_lookup",
+]
