@@ -1,8 +1,9 @@
-{ lib, config, pkgs, ... }:
+{ inputs, lib, config, pkgs, ... }:
 
 {
   imports =
     [
+      inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x1-6th-gen
       ./modules/boojum-hardware.nix
       ./modules/upgrade-diff.nix
       # ./modules/wireguard-mesquite.nix
