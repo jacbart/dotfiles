@@ -17,3 +17,6 @@ export DOCKER_BUILDKIT=1
 
 # nix path
 export NIX_PATH="$HOME/.nix-defexpr/channels${NIX_PATH:+:$NIX_PATH}"
+
+# Editor
+export EDITOR="hx"
