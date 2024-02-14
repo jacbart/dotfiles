@@ -163,18 +163,14 @@ function yes_or_no {
 
 if [[ "$#" == "0" ]]; then
   if [[ -d $HOME/.dotfiles ]]; then
-    yes_or_no "~/.dotfiles already exists, would you like to reinstall?"
-    uninstall-dotfiles
-    install
+    yes_or_no "~/.dotfiles already exists, would you like to reinstall?" && uninstall-dotfiles && install
   else
     install
   fi
 elif [[ "$1" == "uninstall" ]]; then
   if [[ -d $HOME/.dotfiles ]]; then
-    yes_or_no "uninstall ~/.dotfiles?"
-    uninstall-dotfiles
-    yes_or_no "uninstall nix?"
-    uninstall-nix
+    yes_or_no "uninstall ~/.dotfiles?" && uninstall-dotfiles
+    yes_or_no "uninstall nix?" && uninstall-nix
   fi
 else
   echo "unknown command"
