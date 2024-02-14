@@ -7,11 +7,12 @@
 - curl  
 
 ```sh
-zsh <(curl -s https://raw.githubusercontent.com/jacbart/dotfiles/main/install.zsh)
+zsh <(curl -s https://raw.githubusercontent.com/jacbart/dotfiles/main/installer.zsh)
 ```
 
 **script installs**  
 - nix  
+  - stow
 - home-manager  
   - htop  
   - tmux  
@@ -24,9 +25,7 @@ zsh <(curl -s https://raw.githubusercontent.com/jacbart/dotfiles/main/install.zs
   - age  
   - bitwarden-cli  
   - go  
+    - theykk/git-switcher  
   - starship  
-- theykk/git-switcher  
-- asdf  
-  - ruby  
-  - node  
+
 

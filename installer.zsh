@@ -129,7 +129,7 @@ function install() {
   fi
 }
 
-function uninstall {
+function uninstall-dotfiles {
   pushd $STOW_DIR
   for f in *; do
     if [ -d "$f" ]; then
@@ -143,7 +143,9 @@ function uninstall {
   rm -f $HOME/.antibody_plugins.sh
   rm -rf $HOME/.tmux
   rm -rf $HOME/.dotfiles
+}
 
+function uninstall-nix {
   nix-channel --remove home-manager
   nix-channel --remove nixpkgs
   /nix/nix-installer uninstall
@@ -154,14 +156,26 @@ function yes_or_no {
     read -q yn\?"$* [y/n]: "
     case $yn in
       [Yy]*) echo "" ; return 0  ;;
-      [Nn]*) echo "Aborted" ; return  1 ;;
+      [Nn]*) echo "\nInstaller Aborted" ; return  1 ;;
     esac
   done
 }
 
-if [[ -d $HOME/.dotfiles ]]; then
-  message="~/.dotfiles already exists, would you like to remove and install again?"
-  yes_or_no "$message" && uninstall && install
+if [[ "$#" == "0" ]]; then
+  if [[ -d $HOME/.dotfiles ]]; then
+    yes_or_no "~/.dotfiles already exists, would you like to reinstall?"
+    uninstall-dotfiles
+    install
+  else
+    install
+  fi
+elif [[ "$1" == "uninstall" ]]; then
+  if [[ -d $HOME/.dotfiles ]]; then
+    yes_or_no "uninstall ~/.dotfiles?"
+    uninstall-dotfiles
+    yes_or_no "uninstall nix?"
+    uninstall-nix
+  fi
 else
-  install
+  echo "unknown command"
 fi
