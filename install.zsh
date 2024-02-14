@@ -133,7 +133,7 @@ function uninstall {
         st -D $f
     fi
   done
-  pop
+  popd
   rm -rf $HOME/.config/nix
   rm -rf $HOME/.config/gitconfigs
   rm -f $HOME/.antibody_plugin.sh
