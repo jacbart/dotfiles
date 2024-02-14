@@ -156,7 +156,7 @@ function yes_or_no {
     read -q yn\?"$* [y/n]: "
     case $yn in
       [Yy]*) echo "" ; return 0  ;;
-      [Nn]*) echo "\nInstaller Aborted" ; return  1 ;;
+      [Nn]*) echo "Aborted" ; return  1 ;;
     esac
   done
 }
