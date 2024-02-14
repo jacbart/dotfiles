@@ -1,23 +1,22 @@
 #!/bin/zsh
 
+export STOW_DIR="$HOME/.dotfiles/stowpkgs"
+alias st="stow -v -t $HOME"
+
 function install_nix {
   if type nix &> /dev/null; then
     echo "Skipping Nix install"
   else
-    # Platform Specific install Nix
-    platform=$(uname)
-    if [ "$platform" = "Darwin" ]; then
-      echo "Installing Nix Package Manager"
-      sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon
-      wait
-    else
-      echo "Installing Nix Package Manager"
-      sh <(curl -L https://nixos.org/nix/install) --no-daemon
-      wait
-    fi
+    # https://zero-to-nix.com/start/install
+    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+    # Install nixpkgs unstable channel
+    nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+    nix-channel --update nixpkgs
+
+    nix profile install 'nixpkgs#stow'
   fi
   if [ ! -e $HOME/.config/nix/nix.conf ]; then
-    ln -s $HOME/.dotfiles/config/nix/config $HOME/.config/nix
+    st -S nix
   fi
   if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
     source $HOME/.nix-profile/etc/profile.d/nix.sh;
@@ -30,10 +29,9 @@ function install_home_manager {
     echo "Skipping home-manager install"
   else
     echo "Installing home-manager"
-    # Install channels
+    # Install home-manager channel
     nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-    nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
-    nix-channel --update
+    nix-channel --update home-manager
 
     # Install home-manager
     nix-shell '<home-manager>' -A install
@@ -42,13 +40,12 @@ function install_home_manager {
   rm $HOME/.config/home-manager/home.nix
   platform=$(uname)
   if [ "$platform" = "Darwin" ]; then
-    sed "s/USER/$USER/" $HOME/.dotfiles/config/nix/home-manager/home.nix > $HOME/.dotfiles/config/current-home.nix
-    ln -s $HOME/.dotfiles/config/current-home.nix $HOME/.config/home-manager/home.nix
+    sed "s/USER/$USER/" $HOME/.dotfiles/config/nix/home-manager/home.nix > $STOW_DIR/home-manager/.config/home-manager/home.nix
   else
-    cp $HOME/.dotfiles/config/nix/home-manager/home.nix $HOME/.dotfiles/config/current-home.nix
-    sed -i "s/USER/$USER/" $HOME/.dotfiles/config/current-home.nix
-    ln -s $HOME/.dotfiles/config/current-home.nix $HOME/.config/home-manager/home.nix
+    cp $HOME/.dotfiles/config/nix/home-manager/home.nix $STOW_DIR/home-manager/.config/home-manager/home.nix
+    sed -i "s/USER/$USER/" $STOW_DIR/home-manager/.config/home-manager/home.nix
   fi
+  st -S home-manager
   
   home-manager build && wait
   home-manager switch && wait
@@ -60,15 +57,18 @@ function install() {
 
   if type zsh &> /dev/null; then
     install_nix && wait
+    if type stow &> /dev/null; then
+      nix profile install 'nixpkgs#stow'
+    fi
     install_home_manager && wait
 
     # Link zsh configs
     echo "removing old zshrc"
     rm -f  $HOME/.zshrc
-    echo "linking new zshrc"
-    ln -s $HOME/.dotfiles/shell/zshrc $HOME/.zshrc
     echo "touching zshrc.local"
     touch $HOME/.zshrc.local
+    [[ -f $HOME/.tmux.conf ]] && rm -f $HOME/.tmux.conf
+    st -S shell
 
     # Adding common directories
     echo "ensuring $HOME/workspace"
@@ -82,55 +82,27 @@ function install() {
 
     # Setup git-switcher configs
     if [[ ! -d $HOME/.config/gitconfigs ]]; then
-      echo "linking gitconfigs for git switcher"
-      mkdir -p $HOME/.config/gitconfigs
-      ln -s $HOME/.dotfiles/config/gitconfigs/* $HOME/.config/gitconfigs/
+      st -S gitconfigs --no-folding
       echo "run: go install github.com/theykk/git-switcher@latest to install git switcher"
+    else
+      st -R gitconfigs --no-folding
     fi
 
-    # Setup asdf version manager configs
-    # [[ ! -d $HOME/.asdf ]] && git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
-    # echo "ensuring $HOME/.asdfrc"
-    [[ ! -f $HOME/.asdfrc ]] && ln -s $HOME/.dotfiles/config/asdf/asdfrc $HOME/.asdfrc
-    echo "ensuring $HOME/.tool-versions"
-    [[ ! -f $HOME/.tool-versions ]] && ln -s $HOME/.dotfiles/config/asdf/tool-versions $HOME/.tool-versions
-
-    # if type nvim &> /dev/null; then
-    #   echo "removing old neovim configs"
-    #   [[ -d $HOME/.config/nvim ]] && rm -rf  $HOME/.config/nvim
-    #   echo "linking new neovim configs"
-    #   ln -s $HOME/.dotfiles/config/nvim $HOME/.config/
-    # fi
-    
     if type hx &> /dev/null; then
       echo "removing old helix config"
       [[ -d $HOME/.config/helix ]] && rm -rf $HOME/.config/helix
-      echo "linking new helix configs"
-      ln -s $HOME/.dotfiles/config/helix $HOME/.config/
+      st -S helix
     fi
 
     if type tmux &> /dev/null; then
-      echo "removing old tmux config"
-      [[ -f $HOME/.tmux.conf ]] && rm -f $HOME/.tmux.conf
       echo "ensuring tmux package manager"
       [[ ! -d $HOME/.tmux ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-      echo "linking new tmux config"
-      ln -s $HOME/.dotfiles/config/tmux/tmux.conf $HOME/.tmux.conf
-    fi
-
-    if type kitty &> /dev/null; then
-      echo "removing old kitty config"
-      [[ -d $HOME/.config/kitty ]] && rm -rf  $HOME/.config/kitty
-      mkdir -p $HOME/.config/kitty
-      echo "linking new kitty config"
-      ln -s $HOME/.dotfiles/config/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
     fi
 
     if type wezterm &> /dev/null; then
       echo "removing old wezterm config"
       [[ -f $HOME/.wezterm.lua ]] && rm -f $HOME/.wezterm.lua
-      echo "linking new wezterm config"
-      ln -s $HOME/.dotfiles/config/wezterm/wezterm.lua $HOME/.wezterm.lua
+      st -S wezterm
     fi
 
     if ! type "antibody" &> /dev/null; then

@@ -8,4 +8,4 @@ alias t="tmux"
 alias j="z"
 alias gs="git status"
 alias tf="terraform"
-
+alias st="stow -v -t $HOME"

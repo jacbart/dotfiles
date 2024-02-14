@@ -20,3 +20,6 @@ export NIX_PATH="$HOME/.nix-defexpr/channels${NIX_PATH:+:$NIX_PATH}"
 
 # Editor
 export EDITOR="hx"
+
+# stow package directory
+export STOW_DIR="$HOME/.dotfiles/stowpkgs"
