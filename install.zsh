@@ -12,7 +12,8 @@ function install_nix {
     # Install nixpkgs unstable channel
     nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
     nix-channel --update nixpkgs
-
+  fi
+  if ! type stow &> /dev/null; then
     nix profile install 'nixpkgs#stow'
   fi
   if [ ! -e $HOME/.config/nix/nix.conf ]; then
@@ -40,7 +41,7 @@ function install_home_manager {
     nix-shell '<home-manager>' -A install
   fi
   # Platform Specific home.nix linking
-  rm $HOME/.config/home-manager/home.nix
+  rm -rf $HOME/.config/home-manager
   mkdir -p $STOW_DIR/home-manager/.config/home-manager
   platform=$(uname)
   if [ "$platform" = "Darwin" ]; then
@@ -61,7 +62,7 @@ function install() {
 
   if type zsh &> /dev/null; then
     install_nix && wait
-    if type stow &> /dev/null; then
+    if ! type stow &> /dev/null; then
       nix profile install 'nixpkgs#stow'
     fi
     install_home_manager && wait
@@ -109,8 +110,8 @@ function install() {
       st -S wezterm
     fi
 
-    if ! type "antibody" &> /dev/null; then
-      antibody bundle < $DOTFILES/shell/antibody_plugins.txt > $HOME/.antibody_plugins.sh
+    if type "antibody" &> /dev/null; then
+      antibody bundle < $HOME/.dotfiles/shell/antibody_plugins.txt > $HOME/.antibody_plugins.sh
       chmod +x $HOME/.antibody_plugin.sh
     fi 
 
@@ -143,6 +144,8 @@ function uninstall {
   rm -rf $HOME/.tmux
   rm -rf $HOME/.dotfiles
 
+  nix-channel --remove home-manager
+  nix-channel --remove nixpkgs
   /nix/nix-installer uninstall
 }
 
