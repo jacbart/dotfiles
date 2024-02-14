@@ -139,7 +139,7 @@ function uninstall {
   popd
   rm -rf $HOME/.config/nix
   rm -rf $HOME/.config/gitconfigs
-  rm -f $HOME/.antibody_plugin.sh
+  rm -f $HOME/.antibody_plugins.sh
   rm -rf $HOME/.tmux
   rm -rf $HOME/.dotfiles
 
