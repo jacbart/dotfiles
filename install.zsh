@@ -16,7 +16,7 @@ function install_nix {
     nix profile install 'nixpkgs#stow'
   fi
   if [ ! -e $HOME/.config/nix/nix.conf ]; then
-    st -S nix
+    st -S nix --no-folding
   fi
   if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
     source $HOME/.nix-profile/etc/profile.d/nix.sh;
@@ -38,6 +38,7 @@ function install_home_manager {
   fi
   # Platform Specific home.nix linking
   rm $HOME/.config/home-manager/home.nix
+  mkdir -p $STOW_DIR/home-manager/.config/home-manager
   platform=$(uname)
   if [ "$platform" = "Darwin" ]; then
     sed "s/USER/$USER/" $HOME/.dotfiles/config/nix/home-manager/home.nix > $STOW_DIR/home-manager/.config/home-manager/home.nix
@@ -124,6 +125,24 @@ function install() {
   fi
 }
 
+function uninstall {
+  pushd $STOW_DIR
+  for f in *; do
+    if [ -d "$f" ]; then
+        echo "Uninstalling $f"
+        st -D $f
+    fi
+  done
+  pop
+  rm -rf $HOME/.config/nix
+  rm -rf $HOME/.config/gitconfigs
+  rm -f $HOME/.antibody_plugin.sh
+  rm -rf $HOME/.tmux
+  rm -rf $HOME/.dotfiles
+
+  /nix/nix-installer uninstall
+}
+
 function yes_or_no {
   while true; do
     read -q yn\?"$* [y/n]: "
@@ -136,7 +155,7 @@ function yes_or_no {
 
 if [[ -d $HOME/.dotfiles ]]; then
   message="~/.dotfiles already exists, would you like to remove and install again?"
-  yes_or_no "$message" && rm -rf "$HOME/.dotfiles" && install
+  yes_or_no "$message" && uninstall && install
 else
   install
 fi
