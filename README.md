@@ -28,4 +28,8 @@ zsh <(curl -s https://raw.githubusercontent.com/jacbart/dotfiles/main/installer.
     - theykk/git-switcher  
   - starship  
 
+## Uninstall Script
 
+```sh
+~/.dotfiles/installer uninstall
+```

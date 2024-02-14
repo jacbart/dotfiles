@@ -129,7 +129,7 @@ function install() {
   fi
 }
 
-function uninstall-dotfiles {
+function uninstall_dotfiles {
   pushd $STOW_DIR
   for f in *; do
     if [ -d "$f" ]; then
@@ -145,7 +145,7 @@ function uninstall-dotfiles {
   rm -rf $HOME/.dotfiles
 }
 
-function uninstall-nix {
+function uninstall_nix {
   nix-channel --remove home-manager
   nix-channel --remove nixpkgs
   /nix/nix-installer uninstall
@@ -163,14 +163,14 @@ function yes_or_no {
 
 if [[ "$#" == "0" ]]; then
   if [[ -d $HOME/.dotfiles ]]; then
-    yes_or_no "~/.dotfiles already exists, would you like to reinstall?" && uninstall-dotfiles && install
+    yes_or_no "~/.dotfiles already exists, would you like to reinstall?" && uninstall_dotfiles && install
   else
     install
   fi
 elif [[ "$1" == "uninstall" ]]; then
   if [[ -d $HOME/.dotfiles ]]; then
-    yes_or_no "uninstall ~/.dotfiles?" && uninstall-dotfiles
-    yes_or_no "uninstall nix?" && uninstall-nix
+    yes_or_no "uninstall ~/.dotfiles?" && uninstall_dotfiles
+    yes_or_no "uninstall nix?" && uninstall_nix
   fi
 else
   echo "unknown command"
