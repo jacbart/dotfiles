@@ -112,7 +112,7 @@ function install() {
 
     if type "antibody" &> /dev/null; then
       antibody bundle < $HOME/.dotfiles/shell/antibody_plugins.txt > $HOME/.antibody_plugins.sh
-      chmod +x $HOME/.antibody_plugin.sh
+      chmod +x $HOME/.antibody_plugins.sh
     fi 
 
     source $HOME/.zshrc
