@@ -31,5 +31,5 @@ zsh <(curl -s https://raw.githubusercontent.com/jacbart/dotfiles/main/installer.
 ## Uninstall Script
 
 ```sh
-~/.dotfiles/installer uninstall
+~/.dotfiles/installer.zsh uninstall
 ```
