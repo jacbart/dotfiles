@@ -86,11 +86,10 @@ function install() {
     [[ ! -d $HOME/.ssh ]] && mkdir $HOME/.ssh
 
     # Setup git-switcher configs
-    if [[ ! -d $HOME/.config/gitconfigs ]]; then
-      st -S gitconfigs --no-folding
-      echo "run: go install github.com/theykk/git-switcher@latest to install git switcher"
+    if [[ ! -f $HOME/.gitconfig ]]; then
+      st -S gitconfig
     else
-      st -R gitconfigs --no-folding
+      st -R gitconfig
     fi
 
     if type hx &> /dev/null; then
@@ -116,14 +115,6 @@ function install() {
     fi 
 
     source $HOME/.zshrc
-
-    if ! type git-switcher &> /dev/null; then
-      # Install git switcher
-      export GOPATH="$HOME/.go"
-      export GOROOT="$HOME/.nix-profile/share/go"
-      echo "installing git-switcher"
-      go install github.com/theykk/git-switcher@latest
-    fi
   else
     echo "missing zsh"
   fi

@@ -12,7 +12,7 @@ zsh <(curl -s https://raw.githubusercontent.com/jacbart/dotfiles/main/installer.
 
 **script installs**  
 - nix  
-  - stow
+  - stow  
 - home-manager  
   - htop  
   - tmux  
@@ -24,8 +24,6 @@ zsh <(curl -s https://raw.githubusercontent.com/jacbart/dotfiles/main/installer.
   - ripgrep  
   - age  
   - bitwarden-cli  
-  - go  
-    - theykk/git-switcher  
   - starship  
 
 ## Uninstall Script

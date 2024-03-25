@@ -23,11 +23,6 @@
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
-  programs.go = {
-    enable = true;
-    package = pkgs.go;
-  };
-
   programs.starship = {
     enable = true;
     # Configuration written to ~/.config/starship.toml
