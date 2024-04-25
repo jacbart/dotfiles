@@ -10,24 +10,25 @@
 ###############
 
 export TERM=xterm-256color
-export DOTFILES="$HOME/.dotfiles"
+export DOTFILES=${HOME}/.dotfiles
+export ZDOTDIR=${DOTFILES}/shell
 
-[[ ! -f $DOTFILES/shell/env.zsh ]] || source $DOTFILES/shell/env.zsh
+[ -f ${ZDOTDIR}/env.zsh ] && source ${ZDOTDIR}/env.zsh
 
 # Platform Specific
 platform=$(uname)
 if [ "$platform" = "Darwin" ]; then
-  [[ ! -f $DOTFILES/shell/macos.zsh ]] || source $DOTFILES/shell/macos.zsh
+  [ -f ${ZDOTDIR}/macos.zsh ] && source ${ZDOTDIR}/macos.zsh
 else
   # get linux distro ID
   export DISTRO_ID=$(cat /etc/*release | grep '^ID=' | sed 's/^ID=*//')
 
   # load linux shell alias' and funcs
-  [[ ! -f $DOTFILES/shell/linux.zsh ]] || source $DOTFILES/shell/linux.zsh
+  [ -f ${ZDOTDIR}/linux.zsh ] && source ${ZDOTDIR}/linux.zsh
 
   # if os is NixOS
   if [ "$DISTRO_ID" = "nixos" ]; then
-    source $DOTFILES/shell/nix.zsh
+    source ${ZDOTDIR}/nix.zsh
   fi
 fi
 
@@ -35,24 +36,23 @@ fi
 ## ALIAS' ##
 ############
 
-[[ ! -f $DOTFILES/shell/alias.zsh ]] || source $DOTFILES/shell/alias.zsh
+[ -f ${ZDOTDIR}/alias.zsh ] && source ${ZDOTDIR}/alias.zsh
 
 ##############
 ## ANTIBODY ##
 ##############
 
 function zsh_plugin_refresh() {
-  antibody bundle < $DOTFILES/shell/antibody_plugins.txt > $HOME/.antibody_plugins.sh
-  chmod +x $HOME/.antibody_plugins.sh
+  antibody bundle < ${ZDOTDIR}/zsh_plugins.txt > ${HOME}/zsh_plugins.zsh
+  chmod +x ${HOME}/zsh_plugins.zsh
 }
 
 if ! type "antibody" &> /dev/null; then
-  $DOTFILES/shell/get_antibody.sh -b $HOME/.local/bin
+  ${ZDOTDIR}/get_antibody.sh -b $HOME/.local/bin
   zsh_plugin_refresh
 fi
 
-
-source $HOME/.antibody_plugins.sh
+[ -f ${HOME}/.zsh_plugins.zsh ] && source ${HOME}/.zsh_plugins.zsh
 
 #########
 ## NIX ##
@@ -60,29 +60,12 @@ source $HOME/.antibody_plugins.sh
 
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
   source $HOME/.nix-profile/etc/profile.d/nix.sh;
-  source $DOTFILES/shell/nix.zsh
+  source ${ZDOTDIR}/nix.zsh
 fi
 
 if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix.sh ]; then
   source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
-  source $DOTFILES/shell/nix.zsh
-fi
-
-##########
-## ASDF ##
-##########
-
-if type asdf &> /dev/null; then
-  if [ "$platform" = "Darwin" ]; then
-    asdf_source=$(readlink -f $(which asdf) | sed 's/bin\/asdf/share\/asdf-vm\/asdf.sh/')
-    source $asdf_source
-  else
-    asdf_source="/nix/store/4d45jv3131knk480986hj4jw477zsh7b-asdf-vm-0.12.0/share/asdf-vm/asdf.sh"
-    source $asdf_source
-  fi
-
-  # append completions to fpath
-  fpath=(${ASDF_DIR}/completions $fpath)
+  source ${ZDOTDIR}/nix.zsh
 fi
 
 ###################
@@ -90,7 +73,7 @@ fi
 ###################
 
 if type bw &> /dev/null; then
-  source $DOTFILES/shell/bw.zsh
+  source ${ZDOTDIR}/bw.zsh
 fi
 
 ###############
@@ -103,8 +86,14 @@ setopt autocd extendedglob notify
 bindkey -e
 zstyle :compinstall filename "$HOME/.zshrc"
 
-# auto complete for ani
-#[[ -f ~/.config/ani/ani.conf ]] && mkdir -p ${fpath[1]} && touch "${fpath[1]}/_ani" && ani gen completion zsh > "${fpath[1]}/_ani"
+# 0 -- vanilla completion (abc => abc)
+# 1 -- smart case completion (abc => Abc)
+# 2 -- word flex completion (abc => A-big-Car)
+# 3 -- full flex completion (abc => ABraCadabra)
+zstyle ':completion:*' matcher-list '' \
+  'm:{a-z\-}={A-Z\_}' \
+  'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
+  'r:|?=** m:{a-z\-}={A-Z\_}'
 
 # initialise completions with ZSH's compinit
 if [ "$platform" = "Darwin" ]; then
@@ -120,11 +109,6 @@ else
   compinit -C
 fi
 
-# Kitty terminal
-#if type kitty &> /dev/null; then
-#  kitty + complete setup zsh | source /dev/stdin
-#fi
-
 # zsh-autosuggestion color highlighting and key bindings
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff5f00"
 bindkey '^E' autosuggest-accept
@@ -134,7 +118,7 @@ bindkey '^ ' forward-word
 ## Functions ##
 ###############
 
-[ -f $DOTFILES/shell/functions.zsh ] && source $DOTFILES/shell/functions.zsh 
+[ -f ${ZDOTDIR}/functions.zsh ] && source ${ZDOTDIR}/functions.zsh 
 
 ##############
 ## STARSHIP ##

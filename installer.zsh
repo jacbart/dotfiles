@@ -1,7 +1,8 @@
 #!/bin/zsh
 
-export STOW_DIR="$HOME/.dotfiles/stowpkgs"
-alias st="stow -v -t $HOME"
+export STOW_DIR="${HOME}/.dotfiles/stowpkgs"
+export ZDOTDIR="${HOME}/.dotfiles/shell"
+alias st="stow -v -t ${HOME}"
 
 function install_nix {
   if type nix &> /dev/null; then
@@ -16,11 +17,11 @@ function install_nix {
   if ! type stow &> /dev/null; then
     nix profile install 'nixpkgs#stow'
   fi
-  if [ ! -e $HOME/.config/nix/nix.conf ]; then
+  if [ ! -e ${HOME}/.config/nix/nix.conf ]; then
     st -S nix --no-folding
   fi
-  if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
-    source $HOME/.nix-profile/etc/profile.d/nix.sh;
+  if [ -e ${HOME}/.nix-profile/etc/profile.d/nix.sh ]; then
+    source ${HOME}/.nix-profile/etc/profile.d/nix.sh;
   fi
   if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
     source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
@@ -28,7 +29,7 @@ function install_nix {
 }
 
 function install_home_manager {
-  export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:$NIX_PATH}
+  export NIX_PATH=${HOME}/.nix-defexpr/channels${NIX_PATH:+:$NIX_PATH}
   if type home-manager &> /dev/null; then
     echo "Skipping home-manager install"
   else
@@ -41,14 +42,14 @@ function install_home_manager {
     nix-shell '<home-manager>' -A install
   fi
   # Platform Specific home.nix linking
-  rm -rf $HOME/.config/home-manager
-  mkdir -p $STOW_DIR/home-manager/.config/home-manager
+  rm -rf ${HOME}/.config/home-manager
+  mkdir -p ${STOW_DIR}/home-manager/.config/home-manager
   platform=$(uname)
   if [ "$platform" = "Darwin" ]; then
-    sed "s/USER/$USER/" $HOME/.dotfiles/config/nix/home-manager/home.nix > $STOW_DIR/home-manager/.config/home-manager/home.nix
+    sed "s/USER/${USER}/" ${HOME}/.dotfiles/config/nix/home-manager/home.nix > ${STOW_DIR}/home-manager/.config/home-manager/home.nix
   else
-    cp $HOME/.dotfiles/config/nix/home-manager/home.nix $STOW_DIR/home-manager/.config/home-manager/home.nix
-    sed -i "s/USER/$USER/" $STOW_DIR/home-manager/.config/home-manager/home.nix
+    cp ${HOME}/.dotfiles/config/nix/home-manager/home.nix ${STOW_DIR}/home-manager/.config/home-manager/home.nix
+    sed -i "s/USER/${USER}/" ${STOW_DIR}/home-manager/.config/home-manager/home.nix
   fi
   st -S home-manager
   
@@ -58,7 +59,7 @@ function install_home_manager {
 
 function install() {
   # Download dotfiles
-  git clone https://github.com/jacbart/dotfiles.git $HOME/.dotfiles
+  git clone https://github.com/jacbart/dotfiles.git ${HOME}/.dotfiles
 
   if type zsh &> /dev/null; then
     install_nix && wait
@@ -69,24 +70,24 @@ function install() {
 
     # Link zsh configs
     echo "removing old zshrc"
-    rm -f  $HOME/.zshrc
+    rm -f  ${HOME}/.zshrc
     echo "touching zshrc.local"
-    touch $HOME/.zshrc.local
-    [[ -f $HOME/.tmux.conf ]] && rm -f $HOME/.tmux.conf
+    touch ${HOME}/.zshrc.local
+    [[ -f ${HOME}/.tmux.conf ]] && rm -f ${HOME}/.tmux.conf
     st -S shell
 
     # Adding common directories
-    echo "ensuring $HOME/workspace"
-    [[ ! -d $HOME/workspace ]] && mkdir $HOME/workspace
-    echo "ensuring $HOME/workspace/personal/notes"
-    [[ ! -d $HOME/workspace/personal/notes ]] && mkdir -p $HOME/workspace/personal/notes
-    echo "ensuring $HOME/bin"
-    [[ ! -d $HOME/bin ]] && mkdir $HOME/bin
-    echo "ensuring $HOME/.ssh"
-    [[ ! -d $HOME/.ssh ]] && mkdir $HOME/.ssh
+    echo "ensuring ${HOME}/workspace"
+    [[ ! -d ${HOME}/workspace ]] && mkdir ${HOME}/workspace
+    echo "ensuring ${HOME}/workspace/personal/notes"
+    [[ ! -d ${HOME}/workspace/personal/notes ]] && mkdir -p ${HOME}/workspace/personal/notes
+    echo "ensuring ${HOME}/bin"
+    [[ ! -d ${HOME}/bin ]] && mkdir ${HOME}/bin
+    echo "ensuring ${HOME}/.ssh"
+    [[ ! -d ${HOME}/.ssh ]] && mkdir ${HOME}/.ssh
 
     # Setup git-switcher configs
-    if [[ ! -f $HOME/.gitconfig ]]; then
+    if [[ ! -f ${HOME}/.gitconfig ]]; then
       st -S gitconfig
     else
       st -R gitconfig
@@ -94,34 +95,34 @@ function install() {
 
     if type hx &> /dev/null; then
       echo "removing old helix config"
-      [[ -d $HOME/.config/helix ]] && rm -rf $HOME/.config/helix
+      [[ -d ${HOME}/.config/helix ]] && rm -rf ${HOME}/.config/helix
       st -S helix
     fi
 
     if type tmux &> /dev/null; then
       echo "ensuring tmux package manager"
-      [[ ! -d $HOME/.tmux ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+      [[ ! -d ${HOME}/.tmux ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     fi
 
     if type wezterm &> /dev/null; then
       echo "removing old wezterm config"
-      [[ -f $HOME/.wezterm.lua ]] && rm -f $HOME/.wezterm.lua
+      [[ -f ${HOME}/.wezterm.lua ]] && rm -f ${HOME}/.wezterm.lua
       st -S wezterm
     fi
 
     if type "antibody" &> /dev/null; then
-      antibody bundle < $HOME/.dotfiles/shell/antibody_plugins.txt > $HOME/.antibody_plugins.sh
-      chmod +x $HOME/.antibody_plugins.sh
-    fi 
+      antibody bundle < ${ZDOTDIR}/zsh_plugins.txt > ${HOME}/.zsh_plugins.sh
+      chmod +x ${HOME}/.zsh_plugins.sh
+    fi
 
-    source $HOME/.zshrc
+    source ${HOME}/.zshrc
   else
     echo "missing zsh"
   fi
 }
 
 function uninstall_dotfiles {
-  pushd $STOW_DIR
+  pushd ${STOW_DIR}
   for f in *; do
     if [ -d "$f" ]; then
         echo "Uninstalling $f"
@@ -129,11 +130,11 @@ function uninstall_dotfiles {
     fi
   done
   popd
-  rm -rf $HOME/.config/nix
-  rm -rf $HOME/.config/gitconfigs
-  rm -f $HOME/.antibody_plugins.sh
-  rm -rf $HOME/.tmux
-  rm -rf $HOME/.dotfiles
+  rm -rf ${HOME}/.config/nix
+  rm -rf ${HOME}/.config/gitconfigs
+  rm -f ${HOME}/.antibody_plugins.sh
+  rm -rf ${HOME}/.tmux
+  rm -rf ${HOME}/.dotfiles
 }
 
 function uninstall_nix {
@@ -153,13 +154,13 @@ function yes_or_no {
 }
 
 if [[ "$#" == "0" ]]; then
-  if [[ -d $HOME/.dotfiles ]]; then
+  if [[ -d ${HOME}/.dotfiles ]]; then
     yes_or_no "~/.dotfiles already exists, would you like to reinstall?" && uninstall_dotfiles && install
   else
     install
   fi
 elif [[ "$1" == "uninstall" ]]; then
-  if [[ -d $HOME/.dotfiles ]]; then
+  if [[ -d ${HOME}/.dotfiles ]]; then
     yes_or_no "uninstall ~/.dotfiles?" && uninstall_dotfiles
     yes_or_no "uninstall nix?" && uninstall_nix
   fi

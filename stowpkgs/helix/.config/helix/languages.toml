@@ -1,4 +1,4 @@
 [[language]]
 name = "hcl"
-file-types = ["tf", "tfvars", "hcl", "koi"]
+file-types = ["tf", "tfvars", "hcl", "jaws"]
 auto-format = true
