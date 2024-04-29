@@ -28,14 +28,9 @@ export ZDOTDIR=${DOTFILES}/shell
 ###################
 
 function zsh_plugin_refresh() {
-  antibody bundle < ${ZDOTDIR}/zsh_plugins.txt > ${HOME}/zsh_plugins.zsh
-  chmod +x ${HOME}/zsh_plugins.zsh
+  antibody bundle < ${ZDOTDIR}/zsh_plugins.txt > ${HOME}/.zsh_plugins.zsh
+  chmod +x ${HOME}/.zsh_plugins.zsh
 }
-
-if ! type "antibody" &> /dev/null; then
-  ${ZDOTDIR}/get_antibody.sh -b $HOME/.local/bin
-  zsh_plugin_refresh
-fi
 
 [ -f ${HOME}/.zsh_plugins.zsh ] && source ${HOME}/.zsh_plugins.zsh
 
