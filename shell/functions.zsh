@@ -1,5 +1,5 @@
 if type kubectl &> /dev/null; then
-  [[ -f $DOTFILES/shell/kubectl.zsh ]] && source $DOTFILES/shell/kubectl.zsh
+  [ -f ${ZDOTDIR}/kubectl.zsh ] && source ${ZDOTDIR}/kubectl.zsh
 fi
 
 function kp {
@@ -9,27 +9,23 @@ function kp {
   fi
 }
 
-TUNNEL=
-INTERNAL_PORT=9000
-tunnel () {
-        echo "forwarding $1..." 
-        \ssh root@$TUNNEL 'pkill -o -u $USER sshd'
-        \ssh -o "ExitOnForwardFailure yes" -N -R $INTERNAL_PORT:localhost:$1 root@$TUNNEL
+# TUNNEL=
+# INTERNAL_PORT=9000
+# tunnel () {
+#         echo "forwarding $1..." 
+#         \ssh root@$TUNNEL 'pkill -o -u $USER sshd'
+#         \ssh -o "ExitOnForwardFailure yes" -N -R $INTERNAL_PORT:localhost:$1 root@$TUNNEL
+# }
+
+function jawson {
+  export JAWS_CONFIG_KEY=$(op item get JAWS_CONFIG_KEY --fields label=password)
 }
 
-function koion {
-  export KOI_CONFIG_KEY=$(op item get KOI_CONFIG_KEY --fields label=password)
+function jawsoff {
+  unset JAWS_CONFIG_KEY
 }
 
-function koioff {
-  unset KOI_CONFIG_KEY
+function jaws-op {
+  JAWS_CONFIG_KEY=$(op item get JAWS_CONFIG_KEY --fields label=password) koi "$@"
 }
-
-function koi-op {
-  KOI_CONFIG_KEY=$(op item get KOI_CONFIG_KEY --fields label=password) koi "$@"
-}
-#alias koi=koi-op
-
-function rundocker() {
-  docker run --rm "$@" $(docker build -q .)
-}
+#alias jaws=jaws-op

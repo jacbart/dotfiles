@@ -1,3 +1,4 @@
 stowpkgs/home-manager/.config/home-manager/home.nix
 **/.env.*
 **/.env
+**/.zcompdump*

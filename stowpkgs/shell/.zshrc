@@ -5,32 +5,11 @@
 # uncomment the below line and the last line in this file 'zprof' to enable zsh profiling
 #zmodload zsh/zprof
 
-###############
-## Variables ##
-###############
-
-export TERM=xterm-256color
-export DOTFILES=${HOME}/.dotfiles
-export ZDOTDIR=${DOTFILES}/shell
+###########################
+## Environment Variables ##
+###########################
 
 [ -f ${ZDOTDIR}/env.zsh ] && source ${ZDOTDIR}/env.zsh
-
-# Platform Specific
-platform=$(uname)
-if [ "$platform" = "Darwin" ]; then
-  [ -f ${ZDOTDIR}/macos.zsh ] && source ${ZDOTDIR}/macos.zsh
-else
-  # get linux distro ID
-  export DISTRO_ID=$(cat /etc/*release | grep '^ID=' | sed 's/^ID=*//')
-
-  # load linux shell alias' and funcs
-  [ -f ${ZDOTDIR}/linux.zsh ] && source ${ZDOTDIR}/linux.zsh
-
-  # if os is NixOS
-  if [ "$DISTRO_ID" = "nixos" ]; then
-    source ${ZDOTDIR}/nix.zsh
-  fi
-fi
 
 ############
 ## ALIAS' ##
@@ -38,9 +17,9 @@ fi
 
 [ -f ${ZDOTDIR}/alias.zsh ] && source ${ZDOTDIR}/alias.zsh
 
-##############
-## ANTIBODY ##
-##############
+###################
+## SHELL PLUGINS ##
+###################
 
 function zsh_plugin_refresh() {
   antibody bundle < ${ZDOTDIR}/zsh_plugins.txt > ${HOME}/zsh_plugins.zsh
@@ -76,12 +55,14 @@ if type bw &> /dev/null; then
   source ${ZDOTDIR}/bw.zsh
 fi
 
-###############
+####################
+## SHELL SETTINGS ##
+####################
 
-# from zsh configuration script
 HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=100000
+
 setopt autocd extendedglob notify
 bindkey -e
 zstyle :compinstall filename "$HOME/.zshrc"
@@ -101,7 +82,7 @@ if [ "$platform" = "Darwin" ]; then
 else
   zcomp_date=$(date -d "@$(stat -c '%Y' ~/.zcompdump)" +'%j')
 fi
-
+# ensure that the Zsh shell has the most up-to-date completion
 autoload -Uz compinit
 if [ $(date +'%j') != $zcomp_date ]; then
   compinit
@@ -118,7 +99,7 @@ bindkey '^ ' forward-word
 ## Functions ##
 ###############
 
-[ -f ${ZDOTDIR}/functions.zsh ] && source ${ZDOTDIR}/functions.zsh 
+[ -f ${ZDOTDIR}/functions.zsh ] && source ${ZDOTDIR}/functions.zsh
 
 ##############
 ## STARSHIP ##
@@ -136,10 +117,16 @@ if type "direnv" &> /dev/null; then
   eval "$(direnv hook zsh)"
 fi
 
-############
+####################
+## LOCAL OVERRIDE ##
+####################
 
 # add any overrides to .zshrc.local
 source $HOME/.zshrc.local
+
+#########
+## FZF ##
+#########
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

@@ -3,6 +3,7 @@
 {
   home.username = "USER";
   home.homeDirectory = "/home/${config.home.username}";
+  # home.homeDirectory = "/Users/${config.home.username}";
 
   # targets.genericLinux.enable = true;
   nixpkgs.config.allowUnfree = true;

@@ -1,3 +1,9 @@
+export TERM=xterm-256color
+
+# DOTFILES
+export DOTFILES=${HOME}/.dotfiles
+export ZDOTDIR=${DOTFILES}/shell
+
 # GO ENV
 export GOPATH="$HOME/.go"
 #export GOROOT="/usr/local/go"
@@ -23,3 +29,20 @@ export EDITOR="hx"
 
 # stow package directory
 export STOW_DIR="$HOME/.dotfiles/stowpkgs"
+
+# Platform Specific
+platform=$(uname)
+if [ "$platform" = "Darwin" ]; then
+  [ -f ${ZDOTDIR}/macos.zsh ] && source ${ZDOTDIR}/macos.zsh
+else
+  # get linux distro ID
+  export DISTRO_ID=$(cat /etc/*release | grep '^ID=' | sed 's/^ID=*//')
+
+  # load linux shell alias' and funcs
+  [ -f ${ZDOTDIR}/linux.zsh ] && source ${ZDOTDIR}/linux.zsh
+
+  # if os is NixOS
+  if [ "$DISTRO_ID" = "nixos" ]; then
+    source ${ZDOTDIR}/nix.zsh
+  fi
+fi
