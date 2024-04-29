@@ -23,38 +23,11 @@ export ZDOTDIR=${DOTFILES}/shell
 
 [ -f ${ZDOTDIR}/alias.zsh ] && source ${ZDOTDIR}/alias.zsh
 
-###################
-## SHELL PLUGINS ##
-###################
+###############
+## Functions ##
+###############
 
-ANTIDOTE_PATH="$(nix eval -f '<nixpkgs>' --raw antidote)/share/antidote/antidote.zsh"
-
-if [ -f $ANTIDOTE_PATH ]; then
-  source $ANTIDOTE_PATH
-  antidote load
-fi
-
-#########
-## NIX ##
-#########
-
-if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
-  source $HOME/.nix-profile/etc/profile.d/nix.sh;
-  source ${ZDOTDIR}/nix.zsh
-fi
-
-if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix.sh ]; then
-  source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
-  source ${ZDOTDIR}/nix.zsh
-fi
-
-###################
-## BITWARDEN-CLI ##
-###################
-
-if type bw &> /dev/null; then
-  source ${ZDOTDIR}/bw.zsh
-fi
+[ -f ${ZDOTDIR}/functions.zsh ] && source ${ZDOTDIR}/functions.zsh
 
 ####################
 ## SHELL SETTINGS ##
@@ -96,11 +69,38 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff5f00"
 bindkey '^E' autosuggest-accept
 bindkey '^ ' forward-word
 
-###############
-## Functions ##
-###############
+#########
+## NIX ##
+#########
 
-[ -f ${ZDOTDIR}/functions.zsh ] && source ${ZDOTDIR}/functions.zsh
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+  source $HOME/.nix-profile/etc/profile.d/nix.sh;
+  source ${ZDOTDIR}/nix.zsh
+fi
+
+if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix.sh ]; then
+  source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
+  source ${ZDOTDIR}/nix.zsh
+fi
+
+###################
+## SHELL PLUGINS ##
+###################
+
+ANTIDOTE_PATH="$(nix eval -f '<nixpkgs>' --raw antidote)/share/antidote/antidote.zsh"
+
+if [ -f $ANTIDOTE_PATH ]; then
+  source $ANTIDOTE_PATH
+  antidote load
+fi
+
+###################
+## BITWARDEN-CLI ##
+###################
+
+if type bw &> /dev/null; then
+  source ${ZDOTDIR}/bw.zsh
+fi
 
 ##############
 ## STARSHIP ##
