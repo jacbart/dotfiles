@@ -2,3 +2,5 @@ stowpkgs/home-manager/.config/home-manager/home.nix
 **/.env.*
 **/.env
 **/.zcompdump*
+**/.zsh_plugins.zsh
+!**/.zsh_plugins.txt

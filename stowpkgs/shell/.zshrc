@@ -27,12 +27,12 @@ export ZDOTDIR=${DOTFILES}/shell
 ## SHELL PLUGINS ##
 ###################
 
-function zsh_plugin_refresh() {
-  antibody bundle < ${ZDOTDIR}/zsh_plugins.txt > ${HOME}/.zsh_plugins.zsh
-  chmod +x ${HOME}/.zsh_plugins.zsh
-}
+ANTIDOTE_PATH="$(nix eval -f '<nixpkgs>' --raw antidote)/share/antidote/antidote.zsh"
 
-[ -f ${HOME}/.zsh_plugins.zsh ] && source ${HOME}/.zsh_plugins.zsh
+if [ -f $ANTIDOTE_PATH ]; then
+  source $ANTIDOTE_PATH
+  antidote load
+fi
 
 #########
 ## NIX ##

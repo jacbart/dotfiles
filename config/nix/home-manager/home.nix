@@ -9,7 +9,7 @@
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
-    antibody
+    antidote
     age
     bitwarden-cli
     fd
