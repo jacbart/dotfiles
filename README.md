@@ -14,6 +14,7 @@ zsh <(curl -s https://raw.githubusercontent.com/jacbart/dotfiles/main/installer.
 - nix  
   - stow  
 - home-manager  
+  - antidote  
   - htop  
   - tmux  
   - git  

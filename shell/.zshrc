@@ -9,12 +9,6 @@
 ## Environment Variables ##
 ###########################
 
-export TERM=xterm-256color
-
-# DOTFILES
-export DOTFILES=${HOME}/.dotfiles
-export ZDOTDIR=${DOTFILES}/shell
-
 [ -f ${ZDOTDIR}/env.zsh ] && source ${ZDOTDIR}/env.zsh
 
 ############
@@ -86,8 +80,6 @@ fi
 ###################
 ## SHELL PLUGINS ##
 ###################
-
-ANTIDOTE_PATH="$(nix eval -f '<nixpkgs>' --raw antidote)/share/antidote/antidote.zsh"
 
 if [ -f $ANTIDOTE_PATH ]; then
   source $ANTIDOTE_PATH

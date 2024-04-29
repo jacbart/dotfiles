@@ -5,6 +5,7 @@ function nix_update_packages {
 
   if type nix &> /dev/null; then
     nix profile upgrade '.*' && wait
+    export ANTIDOTE_PATH="$(nix eval -f '<nixpkgs>' --raw antidote)/share/antidote/antidote.zsh"
   fi
 
   if type home-manager &> /dev/null; then
