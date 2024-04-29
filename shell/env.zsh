@@ -1,9 +1,3 @@
-export TERM=xterm-256color
-
-# DOTFILES
-export DOTFILES=${HOME}/.dotfiles
-export ZDOTDIR=${DOTFILES}/shell
-
 # GO ENV
 export GOPATH="$HOME/.go"
 #export GOROOT="/usr/local/go"

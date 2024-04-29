@@ -9,6 +9,12 @@
 ## Environment Variables ##
 ###########################
 
+export TERM=xterm-256color
+
+# DOTFILES
+export DOTFILES=${HOME}/.dotfiles
+export ZDOTDIR=${DOTFILES}/shell
+
 [ -f ${ZDOTDIR}/env.zsh ] && source ${ZDOTDIR}/env.zsh
 
 ############
