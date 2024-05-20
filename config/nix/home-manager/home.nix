@@ -12,6 +12,7 @@
     antidote
     age
     bitwarden-cli
+    bws # bitwarden secrets cli
     fd
     fzf
     git

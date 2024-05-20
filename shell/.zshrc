@@ -91,7 +91,7 @@ fi
 ###################
 
 if type bw &> /dev/null; then
-  source ${ZDOTDIR}/bw.zsh
+  source ${ZDOTDIR}/bitwarden.zsh
 fi
 
 ##############
