@@ -2,3 +2,7 @@
 name = "hcl"
 file-types = ["tf", "tfvars", "hcl", "jaws"]
 auto-format = true
+[[language]]
+name = "markdown"
+formatter = { command = "dprint", args = ["fmt", "--stdin", "md"] }
+auto-format = true

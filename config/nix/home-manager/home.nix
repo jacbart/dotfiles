@@ -17,6 +17,7 @@
     fzf
     git
     helix
+    marksman
     htop
     jq
     ripgrep
