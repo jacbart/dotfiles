@@ -11,8 +11,8 @@
   home.packages = with pkgs; [
     antidote
     age
-    bitwarden-cli
-    bws # bitwarden secrets cli
+    #bitwarden-cli
+    #bws # bitwarden secrets cli
     fd
     fzf
     git
