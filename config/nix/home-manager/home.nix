@@ -13,14 +13,18 @@
     age
     #bitwarden-cli
     #bws # bitwarden secrets cli
+    broot
     fd
     fzf
     git
     helix
     marksman
+    markdown-oxide
+    dprint
     htop
     jq
     ripgrep
+    #rofi
   ];
 
   programs.direnv.enable = true;

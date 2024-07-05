@@ -99,6 +99,12 @@ function install() {
       st -S helix
     fi
 
+    if type hx &> /dev/null; then
+      echo "removing old broot config"
+      [[ -d ${HOME}/.config/broot ]] && rm -rf ${HOME}/.config/broot
+      st -S broot
+    fi
+  
     if type tmux &> /dev/null; then
       echo "ensuring tmux package manager"
       [[ ! -d ${HOME}/.tmux ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
