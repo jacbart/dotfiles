@@ -103,6 +103,7 @@ function install() {
       echo "removing old broot config"
       [[ -d ${HOME}/.config/broot ]] && rm -rf ${HOME}/.config/broot
       st -S broot
+      broot --print-shell-function zsh >> ${HOME}/.zshrc.local
     fi
   
     if type tmux &> /dev/null; then
