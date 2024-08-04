@@ -21,4 +21,3 @@
 [core]
   editor = hx
   sshCommand = "ssh -i ~/.ssh/id_gitpersonal"
-

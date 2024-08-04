@@ -4,3 +4,4 @@ stowpkgs/home-manager/.config/home-manager/home.nix
 **/.zcompdump*
 **/.zsh_plugins.zsh
 !**/.zsh_plugins.txt
+shell/.zsh_sessions
